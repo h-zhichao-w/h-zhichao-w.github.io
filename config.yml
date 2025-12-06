@@ -83,7 +83,7 @@ params:
 
   homeInfoParams:
     Title: "Hi, I'm Zhichao."
-    Content: >
+    Content: |
       I am a graduate student from Shanghai Jiao Tong University (SJTU). I have two bachelor degrees, one from SJTU and the other from Московский Аваиационный Институт (МАИ). My current research interests include combinational optimization, reinforcement learning, and application of Large Language Models (LLM). I have also done some work on navigation, constellation mission planning, intention recognition of UAV swarms.  
 
       I enjoy reading, especially detective novels. I am a loyal fan of Poriot - Agatha Chritie, John Dickson Carr, Ellery Queen, and Kindaichi Kōsuke - Yokomizo Seishi. I am also keen on learnign languages. I am a native Chinese speaker, fluent in English and Russian, and currently learning Japanese.
