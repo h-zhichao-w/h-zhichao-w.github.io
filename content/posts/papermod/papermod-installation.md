@@ -161,13 +161,13 @@ You can go through few videos which are available on YouTube for getting to know
 
 ## Quick Links
 
-- ### [Papermod - Features](../papermod-features)
+- ### [Papermod - Features](./papermod-features/index)
 
-- ### [Papermod - FAQs](../papermod-how-to)
+- ### [Papermod - FAQs](./papermod-faq)
 
-- ### [Papermod - Variables](../papermod-variables)
+- ### [Papermod - Variables](./papermod-variables)
 
-- ### [Papermod - Icons](../papermod-icons)
+- ### [Papermod - Icons](./papermod-icons)
 
 - ### [ChangeLog](https://github.com/adityatelange/hugo-PaperMod/releases)
 
