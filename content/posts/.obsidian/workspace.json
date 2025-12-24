@@ -35,8 +35,7 @@
               "title": "math-typesetting"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -186,10 +185,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "math-typesetting.md"
+                "file": "关于 GRPO.md"
               },
               "icon": "lucide-info",
-              "title": "math-typesetting的笔记属性"
+              "title": "关于 GRPO的笔记属性"
             }
           }
         ],
@@ -211,11 +210,11 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "38b13c1b73729286",
+  "active": "474d5db92f2cc274",
   "lastOpenFiles": [
+    "math-typesetting.md",
     "关于 GRPO.md",
     "code_syntax.md",
-    "math-typesetting.md",
     "emoji-support.md",
     "rich-content.md",
     "markdown-syntax.md",

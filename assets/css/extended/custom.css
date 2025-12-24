@@ -15,3 +15,15 @@ iframe {
 .entry-cover img {
     border: 1px solid var(--border);
 }
+
+/* 修改代码块整体字体和大小 */
+code, pre {
+    font-family: "JetBrains Mono", monospace !important;
+    line-height: 1.5;        /* 调整行高，让代码不那么拥挤 */
+}
+
+/* 修改代码块容器（带滚动条的部分） */
+.post-content pre {
+    border-radius: 8px;       /* 让代码块四角变圆润 */
+    padding: 15px;
+}
