@@ -20,6 +20,20 @@
               "icon": "lucide-file",
               "title": "关于 GRPO"
             }
+          },
+          {
+            "id": "7e525bd98e210b8c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "关于 GRPO.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "关于 GRPO"
+            }
           }
         ]
       }
@@ -198,12 +212,12 @@
   },
   "active": "474d5db92f2cc274",
   "lastOpenFiles": [
-    "markdown-syntax.md",
+    "code_syntax.md",
     "math-typesetting.md",
     "关于 GRPO.md",
     "emoji-support.md",
-    "code_syntax.md",
     "rich-content.md",
+    "markdown-syntax.md",
     "2025-12-24.md",
     "新建 文本文档.txt"
   ]

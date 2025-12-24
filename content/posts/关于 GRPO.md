@@ -1,8 +1,8 @@
 ---
 author:
   - Hansen Wong
-title: "关于 GRPO "
-date: 2025-12-24
+title: "关于 GRPO"
+date: "2025-12-24"
 tags:
   - RL
   - algorithm
