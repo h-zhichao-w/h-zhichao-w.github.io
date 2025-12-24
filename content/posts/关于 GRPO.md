@@ -16,9 +16,11 @@ math: true
 
 那么为什么 PPO 要加载这四个模型呢？下图提供了一直观的展示：(蓝色表示 frozen model, 黄色表示Trained model)
 
-![](https://notes.sjtu.edu.cn/uploads/upload_7009606a088ff8badf148ace23645037.png)
+![PPO流程示意图](https://notes.sjtu.edu.cn/uploads/upload_7009606a088ff8badf148ace23645037.png)
 
-$$L_t^{CLIP}(\theta) = \hat{\mathbb{E}}_t \left[ \min(r_t(\theta) \hat{A}_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t) \right]$$
+$$
+L_t^{CLIP}(\theta) = \hat{\mathbb{E}}_t \left[ \min(r_t(\theta) \hat{A}_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t) \right]
+$$
 
 其中 $r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}$ 是新旧策略的概率比。可以发现，优势函数 A 是基于 Reward 和 Reference 的 KL 散度 $r$ 以及 Critic 的 $v$，经过 GAE (Generalized Advantage Estimation) 计算得到的。也正因此，Critc 需要和 Actor 同时训练以消除过拟合的问题。
 
@@ -34,20 +36,23 @@ $$L_t^{CLIP}(\theta) = \hat{\mathbb{E}}_t \left[ \min(r_t(\theta) \hat{A}_t, \te
 
 假设对于一个 query，我一次性让模型输出一组 output $\{o_i | i=1, 2, ..., G\}$，每一个 $o_i$ 都可以算出一个 reward $r_i$，那么这个 $r_i$ 在这个组内的表现有多好就可以表达为：
 
-$$A_i = \frac{r_i - \text{mean}(r_1, r_2, ..., r_G)}{\text{std}(r_1, r_2, ..., r_G)}$$
+$$
+A_i = \frac{r_i - \text{mean}(r_1, r_2, ..., r_G)}{\text{std}(r_1, r_2, ..., r_G)}
+$$
 
 通过这种方式，算法只需要知道“哪个回答比这一组里的其他回答更好”，而不需要通过一个额外的庞大模型来预测“这个回答到底有多好”。
 
 迈出了这一步，就已经把 PPO 简化一大半了！
 
-![](https://notes.sjtu.edu.cn/uploads/upload_9248bf3a41fb32b6a712af93cb05f851.png)
+![GRPO流程示意图](https://notes.sjtu.edu.cn/uploads/upload_9248bf3a41fb32b6a712af93cb05f851.png)
 
 不难观察到，在 GRPO 的流程中，我们完全不需要 Critic ，现在只需要训练 Actor 就可以了！那么GRPO 的损失函数也就变成了：组内相对优势的策略梯度项 和 KL 散度约束项。
 
-$$J_{GRPO}(\theta) = \frac{1}{G} \sum_{i=1}^{G} \left[ \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)} A_i, \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)}, 1-\epsilon, 1+\epsilon\right) A_i \right) - \beta D_{KL}(\pi_\theta || \pi_{ref}) \right]$$
+$$
+J_{GRPO}(\theta) = \frac{1}{G} \sum_{i=1}^{G} \left[ \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)} A_i, \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)}, 1-\epsilon, 1+\epsilon\right) A_i \right) - \beta D_{KL}(\pi_\theta || \pi_{ref}) \right]
+$$
 
 需要指出，这里的 KL 散度和原来的 KL 散度有一些区别。在标准的 RLHF（如 PPO）中，KL 散度通常直接定义为：$$D_{KL}(P \parallel Q) = \sum P(x) \log \frac{P(x)}{Q(x)}$$但在 GRPO 的 Loss 函数中，为了便于在大规模并行训练中直接计算梯度并降低方差，DeepSeek 使用了如下形式的 KL 惩罚项：$$D_{KL}(\pi_\theta \parallel \pi_{ref}) = \frac{\pi_{ref}(o|q)}{\pi_\theta(o|q)} - \log \frac{\pi_{ref}(o|q)}{\pi_\theta(o|q)} - 1$$
-
 这个公式实际上是 KL 散度的一种近似或替代形式（有时被称为“反向 KL”的一种变体估算器）。它的特点是：
 1. 不需要对 $\pi_{ref}$ 采样，只需要在计算 $\pi_\theta$ 的概率时，同时计算 $\pi_{ref}$ 的概率。
 2. 非负性：根据不等式 $x - \log x - 1 \ge 0$（当且仅当 $x=1$ 时等于 0），这个项永远大于等于 0，天然符合距离度量的特性。
