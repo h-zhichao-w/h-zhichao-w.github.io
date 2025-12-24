@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "emoji-support.md",
+                "file": "关于 GRPO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "emoji-support"
+              "title": "关于 GRPO"
             }
           }
         ]
@@ -198,8 +198,10 @@
   },
   "active": "474d5db92f2cc274",
   "lastOpenFiles": [
-    "code_syntax.md",
+    "2025-12-24.md",
     "关于 GRPO.md",
-    "emoji-support.md"
+    "emoji-support.md",
+    "新建 文本文档.txt",
+    "code_syntax.md"
   ]
 }

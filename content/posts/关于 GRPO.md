@@ -1,9 +1,14 @@
 ---
 author:
   - Hansen Wong
+title: "关于 GRPO "
+date: 2025-12-24
 tags:
   - RL
+  - algorithm
+  - LLM
 description: 关于 GRPO 的简单介绍
+math: true
 ---
 ## 从 PPO 出发
 
