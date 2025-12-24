@@ -113,10 +113,10 @@ params:
       title: CV
       url: "https://h-zhichao-w.github.io/files/resume.pdf"
 
-  editPost:
-    URL: "https://github.com/h-zhichao-w/h-zhichao-w.github.io/edit/exampleSite/content"
-    Text: "Edit this page" # edit text
-    appendFilePath: true # to append file path to Edit link
+  # editPost:
+  #   URL: "https://github.com/h-zhichao-w/h-zhichao-w.github.io/edit/exampleSite/content"
+  #   Text: "Edit this page" # edit text
+  #   appendFilePath: true # to append file path to Edit link
 
 markup:
   goldmark:
