@@ -8,6 +8,7 @@ tags:
   - RL
 math: true
 description: 关于 DAPO 的简单介绍
+title: 关于 DAPO
 ---
 
 你这实验结果怎么复现不出来啊
