@@ -55,18 +55,9 @@ More~
 
 所以在 DAPO 中，采用了一种 token 级的策略梯度损失（Token-level Policy Gradient Loss）：
 
-$$
-\begin{split}\mathcal{J}_{\text{DAPO}}(\theta)=& \quad\mathbb{E}_{(q,a)\sim\mathcal{D},\{o_{i}\}_{i=1}^{G}\sim\pi_{ \theta_{\text{old}}}(\cdot|q)}\\ &\quad\Bigg[\frac{1}{\sum_{i=1}^{G}|o_{i}|}{\sum_{i=1}^{G}\sum_ {t=1}^{|o_{i}|}\min\Big(r_{i,t}(\theta)\hat{A}_{i,t},\ \text{clip}\Big(r_{i,t}(\theta),1-\varepsilon_{\text{low}},1+ \varepsilon_{\text{high}}\Big)\hat{A}_{i,t}\Big)}\Bigg],\\ \text{s.t.}&\quad 0<\Big|\{o_{i}\mid\texttt{is\_equivalent}(a,o_{i})\}\Big|<G.\end{split}
-$$
+$$ \begin{aligned} \mathcal{J}_{\text{DAPO}}(\theta)=& \quad\mathbb{E}_{(q,a)\sim\mathcal{D},\{o_{i}\}_{i=1}^{G}\sim\pi_{ \theta_{\text{old}}}(\cdot|q)}\\\\ &\quad\Bigg[\frac{1}{\sum_{i=1}^{G}|o_{i}|}{\sum_{i=1}^{G}\sum_ {t=1}^{|o_{i}|}\min\Big(r_{i,t}(\theta)\hat{A}_{i,t},\ \text{clip}\Big(r_{i,t}(\theta),1-\varepsilon_{\text{low}},1+ \varepsilon_{\text{high}}\Big)\hat{A}_{i,t}\Big)}\Bigg],\\\\ \text{s.t.}&\quad 0<\Big|\{o_{i}\mid\texttt{is\_equivalent}(a,o_{i})\}\Big|<G. \end{aligned} $$
 
 在这种设置中，较长的序列相比较短的序列对整体梯度更新具有更大的影响。此外，从单个 token 的角度来看，如果某种生成模式能够导致奖励增加或减少，那么不管它出现在长响应还是短响应中，都将被同等程度地 prompted 或 suppressed。
-
-$$
-\begin{array}{l}
- A &= Wx + b, \\
- B &= Ay + c.
-\end{array}
-$$
 
 躲猫猫
 ---
@@ -76,7 +67,7 @@ $$
 Soft Punishment的公式长这样：
 
 $$
-R_{\mathrm{length}}(y) = \begin{cases} 0, & |y| \leq L_{\mathrm{max}} - L_{\mathrm{cache}} \\ \frac{(L_{\mathrm{max}} - L_{\mathrm{cache}}) - |y|}{L_{\mathrm{cache}}}, & L_{\mathrm{max}} - L_{\mathrm{cache}} < |y| \leq L_{\mathrm{max}} \\ -1, & L_{\mathrm{max}} < |y| \end{cases}
+R_{\mathrm{length}}(y) = \begin{cases} 0, & |y| \leq L_{\mathrm{max}} - L_{\mathrm{cache}} \\\\ \frac{(L_{\mathrm{max}} - L_{\mathrm{cache}}) - |y|}{L_{\mathrm{cache}}}, & L_{\mathrm{max}} - L_{\mathrm{cache}} < |y| \leq L_{\mathrm{max}} \\\\ -1, & L_{\mathrm{max}} < |y| \end{cases}
 $$
 
 对比发现，这种策略极大地稳定了训了并提升了效果。
