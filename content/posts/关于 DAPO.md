@@ -59,8 +59,8 @@ More~
 $$
 \begin{aligned}
 \mathcal{J}_{\text{DAPO}}(\theta)=& \quad\mathbb{E}_{(q,a)\sim\mathcal{D},\{o_{i}\}_{i=1}^{G}\sim\pi_{ \theta_{\text{old}}}(\cdot|q)} \\
-&\quad\Bigg[\frac{1}{\sum_{i=1}^{G}|o_{i}|}{\sum_{i=1}^{G}\sum_ {t=1}^{|o_{i}|}\min\Big(r_{i,t}(\theta)\hat{A}_{i,t},\ \text{clip}\Big(r_{i,t}(\theta),1-\varepsilon_{\text{low}},1+ \varepsilon_{\text{high}}\Big)\hat{A}_{i,t}\Big)}\Bigg], \\
-\text{s.t.}&\quad 0<\Big|\{o_{i}\mid\texttt{is\_equivalent}(a,o_{i})\}\Big|<G.
+&\quad\Bigg[\frac{1}{\sum_{i=1}^{G}|o_{i}|}{\sum_{i=1}^{G}\sum_{t=1}^{|o_{i}|}\min\Big(r_{i,t}(\theta)\hat{A}_{i,t},\ \text{clip}\Big(r_{i,t}(\theta),1-\varepsilon_{\text{low}},1+ \varepsilon_{\text{high}}\Big)\hat{A}_{i,t}\Big)}\Bigg], \\
+\text{s.t.}&\quad 0 < \Big|\{o_{i}\mid\texttt{is\_equivalent}(a,o_{i})\}\Big| < G.
 \end{aligned}
 $$
 </div>
