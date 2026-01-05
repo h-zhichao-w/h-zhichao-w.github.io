@@ -14,8 +14,8 @@ title: 关于 DAPO
 你这实验结果怎么复现不出来啊
 ---
 
-在之前的文章中，我们简单讲了一下 DeepSeek 的 [GRPO](https://h-zhichao-w.github.io/posts/%E5%85%B3%E4%BA%8E-grpo/)，它通过“去 Critic”和“组内博弈”极大地降低了强化学习的门槛，引来了非常多的关注。但是在复现 DeepSeek-R1 时，有些人就发现朴素的 GRPO (Naive GRPO) 存在一些“小问题”，导致其在 AIME 上的得分只能停留在 30 分左右，远低于 DeepSeek 的 47 分——
-1. **熵坍塌** (Entropy Collapse)：在训练初期，模型的 policy entropy 迅速下降，生成的回答趋同，如下图中的浅蓝色曲线。这意味着模型放弃了“探索”（Exploration），只顾着“利用”（Exploitation）。研究人员认为（后来也证明了）这是因为 PPO/GRPO 的 clip 机制是对称的。对于低概率的 exploration tokens,，它们很容易突破 $1 + \epsilon$ 的天花板，导致稍微有点苗头的创新想法被 Loss 函数截断了。
+在之前的文章中，我们简单讲了一下 DeepSeek 的 [GRPO](https://h-zhichao-w.github.io/posts/%E5%85%B3%E4%BA%8E-grpo/)，它通过“去 Critic”和“组内博弈”极大地降低了强化学习的门槛，引来了非常多的关注。但是在复现 DeepSeek-R1 时，有些人就发现朴素的 GRPO（Naive GRPO）存在一些“小问题”，导致其在 AIME 上的得分只能停留在 30 分左右，远低于 DeepSeek 的 47 分——
+1. **熵坍塌**（Entropy Collapse）：在训练初期，模型的 policy entropy 迅速下降，生成的回答趋同，如下图中的浅蓝色曲线。这意味着模型放弃了“探索”（Exploration），只顾着“利用”（Exploitation）。研究人员认为（后来也证明了）这是因为 PPO/GRPO 的 clip 机制是对称的。对于低概率的 exploration tokens,，它们很容易突破 $1 + \epsilon$ 的天花板，导致稍微有点苗头的创新想法被 Loss 函数截断了。
 
 ![](https://notes.sjtu.edu.cn/uploads/upload_f30f859e8d7c4ac1ddf9f77e5da55b8e.png "图1")
 
