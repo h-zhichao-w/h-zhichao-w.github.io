@@ -165,4 +165,53 @@ places:
     category: hotel
     note: 日本桥的一家酒店，设施还不错，离地铁站近，晚上有点热
   
+  # 京都
+  - name: 稻荷山
+    lat: 34.966967
+    lon: 135.785496
+    date: 2024-08
+    category: mountain
+    note: 稻禾神社后面的山，有成排的鸟居，路边有小神社，晚上爬山氛围感拉满，观景平台可以俯瞰京都夜景
+  - name: 伏见稻荷大社
+    lat: 34.967126
+    lon: 135.772642
+    date: 2024-08
+    category: shinto
+    note: 红色的成排鸟居
+  - name: 国立京都博物馆
+    lat: 34.989837
+    lon: 135.772862
+    date: 2024-08
+    category: museum
+    note: 建筑是典型的明治时期仿西洋建筑，展品以字画和器物居多，不少仿唐和仿宋作品；售票人员很热情，主动提出我可以买学生票；大厅有很有意思的互动区
+  - name: 东本愿寺
+    lat: 34.991060
+    lon: 135.758451
+    category: buddhist
+    date: 2024-08
+    note: 京都市内历史悠久的古寺
+  - name: 八坂神社
+    lat: 35.003609
+    lon: 135.778237
+    date: 2024-08
+    category: shinto
+    note: 祇园祭的重要场所，能看到非常完整的、热闹的日本传统神社祭典，祇园祭期间人会非常多
+  - name: 法观寺
+    lat: 34.998501
+    lon: 135.779310
+    date: 2024-08
+    category: buddhist
+    note: 非常好看的塔，配合一年坂、二年坂、三年坂的日式老街，非常的美丽，极富日本风情
+  - name: 梅小路花传抄温泉酒店
+    lat: 34.988458
+    lon: 135.742466
+    date: 2024-08
+    category: hotel
+    note: 私汤很不错
+  - name: 京都站
+    lat: 34.985304
+    lon: 135.758794
+    date: 2024-08
+    category: transport
+    note: 注意看清急行列车不要坐错
   
