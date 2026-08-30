@@ -33,6 +33,8 @@ places:
     category: park
     date: 2024-10
     note: 江南古典园林，九曲桥城隍庙
+  
+  # 莫斯科
   - name: 红场
     lat: 55.7539
     lon: 37.6208

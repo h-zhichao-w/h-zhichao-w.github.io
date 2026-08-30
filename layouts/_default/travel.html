@@ -7,9 +7,9 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
 <style>
-    /* 本页放宽内容宽度，给地图更多空间 */
+    /* 本页内容宽度与页头一致，地图左缘与站点 logo 对齐 */
     .main {
-        max-width: min(1280px, calc(100% - 2 * var(--gap)));
+        max-width: calc(var(--nav-width) + var(--gap) * 2);
     }
     #travel-map {
         height: clamp(520px, 74vh, 820px);
