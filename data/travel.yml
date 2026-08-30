@@ -62,4 +62,16 @@ places:
     lon: 37.618657
     category: museum
     date: 2024-09
-    note: 展出1812年拿破仑战争的博物馆
+    note: 展出1812年拿破仑战争相关内容的博物馆
+  - name: 国立克里姆林宫剧院
+    lat: 55.751343
+    lon: 37.615437
+    category: nightlife
+    date: 2023 - 2024
+    note: 克里姆林宫里的剧院，有歌舞剧和芭蕾舞剧，票价非常实惠，以前是苏共开大会的地方，体验非常好
+  - name: 列宁墓
+    lat: 55.753736
+    lon: 37.619868
+    category: historic
+    date: 2023 - 2024
+    note: 列宁长眠之地
