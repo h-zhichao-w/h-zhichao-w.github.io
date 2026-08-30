@@ -20,8 +20,8 @@
     }
     /* 分类水滴标记：彩色底 + 白色圆片承托 emoji，保证图标可读 */
     .poi-pin {
-        width: 30px;
-        height: 30px;
+        width: 36px;
+        height: 36px;
         border-radius: 50% 50% 50% 4px;
         transform: rotate(-45deg);
         display: flex;
@@ -32,14 +32,14 @@
     }
     .poi-pin span {
         transform: rotate(45deg);
-        width: 20px;
-        height: 20px;
+        width: 26px;
+        height: 26px;
         border-radius: 50%;
         background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 12px;
+        font-size: 17px;
         line-height: 1;
     }
     /* 图例 */
@@ -141,9 +141,9 @@
             return L.divIcon({
                 className: '',
                 html: '<div class="poi-pin" style="background:' + cat.color + '"><span>' + cat.icon + '</span></div>',
-                iconSize: [30, 30],
-                iconAnchor: [15, 30],
-                popupAnchor: [0, -30]
+                iconSize: [36, 36],
+                iconAnchor: [18, 36],
+                popupAnchor: [0, -36]
             });
         }
 
