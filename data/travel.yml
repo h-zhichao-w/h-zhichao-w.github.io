@@ -20,18 +20,25 @@
 #
 # 下面是示例点位，替换成你自己的足迹即可
 places:
+  # 上海
   - name: 外滩
-    lat: 31.2404
-    lon: 121.4907
+    lat: 31.235322
+    lon: 121.487620
     category: historic
     date: 常来
-    note: 万国建筑博览群，夜景必看
+    note: 万国建筑博览群，夜景必看，19点亮灯，整点敲钟报时播放《东方红》
   - name: 上海博物馆
-    lat: 31.2286
-    lon: 121.4747
+    lat: 31.230346
+    lon: 121.470861
     category: museum
     date: 常来
-    note: 青铜器馆藏一绝
+    note: 国内三大博物院之一
+  - name: 包玉刚图书馆
+    lat: 31.023823
+    lon: 121.425372
+    category: library
+    date: 常来
+    note: “图书馆室我每天都要来的地方”
   
   # 莫斯科
   - name: 红场
