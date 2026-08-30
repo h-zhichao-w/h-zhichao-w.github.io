@@ -7,7 +7,7 @@ tags:
   - algorithm
   - LLM
 series: ["RLVR 算法演进"]
-series_order: 3
+series_order: 2
 description: 关于 GAPO 的简单介绍
 math: true
 ---

@@ -8,7 +8,7 @@ tags:
   - RL
 math: true
 series: ["RLVR 算法演进"]
-series_order: 2
+series_order: 3
 description: 关于 DAPO 的简单介绍
 title: 关于 DAPO
 ---

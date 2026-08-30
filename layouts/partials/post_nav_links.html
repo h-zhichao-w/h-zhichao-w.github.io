@@ -1,14 +1,30 @@
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- if and (gt (len $pages) 1) (in $pages . ) }}
+{{- $prev := "" }}
+{{- $next := "" }}
+
+{{- if .Params.series }}
+{{- $sorted := sort (where site.RegularPages "Params.series" "intersect" $.Params.series) "Params.series_order" }}
+{{- range $i, $p := $sorted }}
+{{- if eq .Permalink $.Permalink }}
+{{- if gt $i 0 }}{{ $prev = index $sorted (sub $i 1) }}{{ end }}
+{{- if lt $i (sub (len $sorted) 1) }}{{ $next = index $sorted (add $i 1) }}{{ end }}
+{{- end }}
+{{- end }}
+{{- else if and (gt (len $pages) 1) (in $pages .) }}
+{{- $prev = $pages.Next . }}
+{{- $next = $pages.Prev . }}
+{{- end }}
+
+{{- if or $prev $next }}
 <nav class="paginav">
-  {{- with $pages.Next . }}
+  {{- with $prev }}
   <a class="prev" href="{{ .Permalink }}">
     <span class="title">« {{ i18n "prev_page" }}</span>
     <br>
     <span>{{- .Name -}}</span>
   </a>
   {{- end }}
-  {{- with $pages.Prev . }}
+  {{- with $next }}
   <a class="next" href="{{ .Permalink }}">
     <span class="title">{{ i18n "next_page" }} »</span>
     <br>
