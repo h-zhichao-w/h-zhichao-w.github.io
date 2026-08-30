@@ -117,7 +117,7 @@
             return CATEGORIES[name] || DEFAULT_CAT;
         }
 
-        var map = L.map('travel-map', { scrollWheelZoom: false });
+        var map = L.map('travel-map', { scrollWheelZoom: true });
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
