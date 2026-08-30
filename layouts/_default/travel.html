@@ -112,16 +112,6 @@
             1px -1px 2px #fff, -1px 1px 2px #fff,
             0 2px 3px rgba(0, 0, 0, 0.25);
     }
-    /* 坐标检索的临时定位标记 */
-    .coord-pin {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.9);
-        border: 4px solid var(--tertiary);
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
-    }
-
     /* 聚合标记样式：适配站点亮暗主题 */
     .marker-cluster {
         background: transparent;
@@ -165,7 +155,7 @@
 </style>
 
 <div class="travel-controls">
-    <input id="travel-q" type="text" placeholder="按名称检索（如：博物馆），或输入坐标定位（如：55.75, 37.62）">
+    <input id="travel-q" type="text" placeholder="按名称检索，如：博物馆 / 伏见稻荷大社">
     <select id="travel-region" title="按区域筛选">
         <option value="">全部区域</option>
     </select>
@@ -231,7 +221,6 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var tempLayer = L.layerGroup().addTo(map); // 坐标定位的临时标记
         map.setView([32, 110], 3); // 初始视野，供后续 flyToBounds 使用
 
         function makeIcon(cat) {
@@ -299,25 +288,14 @@
             apply({ fit: false });
         });
 
-        // 坐标解析："55.75, 37.62" / "55.75，37.62" / "55.75 37.62"
-        function parseCoord(s) {
-            var m = s.match(/^(-?\d{1,3}(?:\.\d+)?)[,，\s]+(-?\d{1,3}(?:\.\d+)?)$/);
-            if (!m) return null;
-            var lat = parseFloat(m[1]), lon = parseFloat(m[2]);
-            if (Math.abs(lat) > 90 || Math.abs(lon) > 180) return null;
-            return { lat: lat, lon: lon };
-        }
-
         function apply(opts) {
             opts = opts || {};
             var q = input.value.trim();
-            var coord = parseCoord(q);
-            var needle = coord ? '' : q.toLowerCase();
+            var needle = q.toLowerCase();
             var region = regionSel.value;
             var shown = [];
 
             cluster.clearLayers();
-            tempLayer.clearLayers();
 
             places.forEach(function (p) {
                 if (typeof p.lat !== 'number' || typeof p.lon !== 'number') return;
@@ -332,20 +310,11 @@
 
             shown.forEach(function (p) { cluster.addLayer(makeMarker(p)); });
 
-            if (coord) {
-                // 坐标检索：定位到该点并放置临时标记
-                tempLayer.addLayer(
-                    L.marker([coord.lat, coord.lon], {
-                        icon: L.divIcon({ className: '', html: '<div class="coord-pin"></div>', iconSize: [18, 18], iconAnchor: [9, 9] })
-                    }).bindPopup('目标坐标：' + coord.lat + ', ' + coord.lon)
-                );
-                map.flyTo([coord.lat, coord.lon], 13, { duration: 0.8 });
-            } else if (opts.fit && shown.length) {
+            if (opts.fit && shown.length) {
                 map.flyToBounds(shown.map(function (p) { return [p.lat, p.lon]; }), { padding: [50, 50], maxZoom: 13, duration: 0.8 });
             }
 
-            countEl.textContent = '显示 ' + shown.length + ' / ' + places.length +
-                (coord ? '（已定位到输入坐标）' : '');
+            countEl.textContent = '显示 ' + shown.length + ' / ' + places.length;
         }
 
         var debounceTimer = null;
