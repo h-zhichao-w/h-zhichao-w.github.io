@@ -18,7 +18,7 @@
         border: 1px solid var(--border);
         z-index: 0; /* 防止地图控件被页头遮挡 */
     }
-    /* 分类水滴标记 */
+    /* 分类水滴标记：彩色底 + 白色圆片承托 emoji，保证图标可读 */
     .poi-pin {
         width: 30px;
         height: 30px;
@@ -32,7 +32,14 @@
     }
     .poi-pin span {
         transform: rotate(45deg);
-        font-size: 15px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
         line-height: 1;
     }
     /* 图例 */
