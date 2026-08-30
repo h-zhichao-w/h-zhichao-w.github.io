@@ -1,3 +1,27 @@
-{{- /* Comments area start */ -}}
-{{- /* to add comments read => https://gohugo.io/content-management/comments/ */ -}}
-{{- /* Comments area end */ -}}
+{{- /*
+giscus 评论系统（基于 GitHub Discussions）
+启用前需完成一次性配置：
+1. 确认仓库 h-zhichao-w/h-zhichao-w.github.io 是 Public 且已开启 Discussions
+   （Settings → General → Features → Discussions）
+2. 安装 giscus app：https://github.com/apps/giscus
+3. 打开 https://giscus.app/zh-CN ，输入仓库名，选择映射方式 pathname、
+   分类建议选 Announcements，页面底部会生成 data-repo-id 和 data-category-id
+4. 把下面两个 REPLACE_ME 占位符替换成生成的值，评论即生效
+*/ -}}
+
+<script src="https://giscus.app/client.js"
+    data-repo="h-zhichao-w/h-zhichao-w.github.io"
+    data-repo-id="REPLACE_ME"
+    data-category="Announcements"
+    data-category-id="REPLACE_ME"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>

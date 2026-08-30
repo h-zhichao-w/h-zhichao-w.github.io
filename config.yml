@@ -68,8 +68,9 @@ params:
   ShowAllPagesInArchive: true
   ShowPageNums: true
   ShowToc: true
-  # comments: false
-  images: ["images/papermod-cover.png"]
+  comments: true   # giscus 评论，见 layouts/partials/comments.html 中的配置说明
+  # og/分享预览图（占位，正式图做好后覆盖 static/images/og-cover.png 即可）
+  images: ["images/og-cover.png"]
   profileMode:
     enabled: false
     title: Zhichao Wang
@@ -155,3 +156,5 @@ services:
     disableInlineCSS: true
   x:
     disableInlineCSS: true
+  googleAnalytics:
+    ID: G-XXXXXXXXXX   # 占位：换成你自己的 GA4 衡量 ID 后生效

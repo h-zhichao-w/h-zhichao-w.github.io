@@ -21,6 +21,9 @@
 </script>
 {{- end -}}
 
+{{- /* Google Analytics（ID 在 config.yml 的 services.googleAnalytics.ID 配置） */ -}}
+{{- template "_internal/google_analytics.html" . }}
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
 
 {{- /* 霞鹜文楷：中文正文字体（子集化 webfont，按需加载） */ -}}
