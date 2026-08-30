@@ -11,7 +11,7 @@
 #   historic   古迹建筑   shinto    神社       modern    现代建筑
 #   mountain   山         river     河流       lake      湖泊
 #   seaside    海滨       waterfall 瀑布       park      公园园林
-#   museum     博物馆     school    学校       library   图书馆
+#   museum     博物馆     gallery   美术馆画廊  school    学校
 #   buddhist   佛寺       taoist    道观
 #   catholic   天主教堂   orthodox  东正教堂   mosque    清真寺
 #   viewpoint  观景打卡   restaurant 餐厅美食  cafe      咖啡甜品
@@ -38,7 +38,7 @@ places:
     lon: 121.425372
     category: library
     date: 常来
-    note: “图书馆室我每天都要来的地方”
+    note: “图书馆是我每天都要来的地方”
   
   # 莫斯科
   - name: 红场
@@ -107,3 +107,20 @@ places:
     date: 2023 - 2024
     category: hotel
     note: 在莫斯科时住的宿舍
+  - name: ГЭС-2
+    lat: 55.742731
+    lon: 37.612740
+    category: 
+    date: 2023-11
+    note: 老旧工厂改造的艺术中心，外立面大量替换为了玻璃，非常具有网红气息
+  - name: 基督救世主大教堂
+    lat: 55.744716
+    lon: 37.605490
+    date: 2023-09
+    note: 历史悠久的东正教堂，苏联时期被破坏，90年代重建
+  - name: 普希金博物馆
+    lat: 55.747344
+    lon: 37.605285
+    date: 2023-09
+    category: 
+    note: 其实和普希金没什么关系，是一个美术馆，有大量的油画和雕塑
