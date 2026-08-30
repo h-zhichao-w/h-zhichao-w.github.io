@@ -1,23 +1,47 @@
-# 旅游足迹数据：在这里添加你去过的地方，地图页会自动更新
+# 旅游足迹数据：在这里添加你标记的地点，地图页会自动更新
+#
 # 字段说明：
-#   name  地点名称（必填）
-#   lat   纬度（必填，十进制度，如 31.2304）
-#   lon   经度（必填，如 121.4737）
-#   date  到访时间（可选，如 "2019-2020"）
-#   note  一句话描述（可选，支持中文）
+#   name     地点名称（必填）
+#   lat/lon  经纬度（必填，十进制度；高德/百度坐标注意先转 WGS84）
+#   category 分类（必填，见下方支持的取值；缺省为灰色的"其他"）
+#   date     到访时间（可选）
+#   note     一句话描述（可选）
+#
+# 支持的 category 取值：
+#   historic   古迹建筑   nature    自然风景   park      公园园林
+#   museum     博物馆     temple    寺庙教堂   viewpoint 观景打卡
+#   restaurant 餐厅美食   cafe      咖啡甜品   hotel     酒店住宿
+#   shopping   购物街区   nightlife 演出夜生活 transport 交通体验
+#
+# 下面是示例点位，替换成你自己的足迹即可
 places:
-  - name: 上海
-    lat: 31.2304
-    lon: 121.4737
-    date: 常驻
-    note: 现居城市
-  - name: 莫斯科
-    lat: 55.7558
-    lon: 37.6173
+  - name: 外滩
+    lat: 31.2404
+    lon: 121.4907
+    category: historic
+    date: 常来
+    note: 万国建筑博览群，夜景必看
+  - name: 上海博物馆
+    lat: 31.2286
+    lon: 121.4747
+    category: museum
+    date: 2025-05
+    note: 青铜器馆藏一绝
+  - name: 豫园
+    lat: 31.2271
+    lon: 121.4921
+    category: park
+    date: 2024-10
+    note: 江南古典园林，九曲桥城隍庙
+  - name: 红场
+    lat: 55.7539
+    lon: 37.6208
+    category: historic
     date: 2019 - 2020
-    note: 莫斯科航空学院（МАИ），生活了一年
-  - name: 圣彼得堡
-    lat: 59.9386
-    lon: 30.3141
-    date: 2019
-    note: 涅瓦河畔的白夜
+    note: 圣瓦西里大教堂、克里姆林宫都在这
+  - name: 古姆百货
+    lat: 55.7546
+    lon: 37.6215
+    category: shopping
+    date: 2019 - 2020
+    note: 红场旁的百年百货，冰淇淋值得吃

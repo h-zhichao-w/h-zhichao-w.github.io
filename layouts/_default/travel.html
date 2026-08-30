@@ -7,29 +7,109 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
 <style>
+    /* 本页放宽内容宽度，给地图更多空间 */
+    .main {
+        max-width: min(1280px, calc(100% - 2 * var(--gap)));
+    }
     #travel-map {
-        height: 540px;
+        height: clamp(520px, 74vh, 820px);
         width: 100%;
         border-radius: var(--radius);
         border: 1px solid var(--border);
         z-index: 0; /* 防止地图控件被页头遮挡 */
     }
-    .travel-popup p {
-        margin: 4px 0 0 0;
+    /* 分类水滴标记 */
+    .poi-pin {
+        width: 30px;
+        height: 30px;
+        border-radius: 50% 50% 50% 4px;
+        transform: rotate(-45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     }
+    .poi-pin span {
+        transform: rotate(45deg);
+        font-size: 15px;
+        line-height: 1;
+    }
+    /* 图例 */
+    .travel-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+        margin: 10px 0;
+        font-size: 0.85em;
+        color: var(--secondary);
+    }
+    .travel-legend .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .travel-legend .legend-dot {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50% 50% 50% 3px;
+        transform: rotate(-45deg);
+        border: 1px solid #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    /* 弹窗 */
     .leaflet-popup-content-wrapper,
     .leaflet-popup-tip {
         background: var(--theme);
         color: var(--content);
     }
+    .poi-popup .poi-cat {
+        display: inline-block;
+        font-size: 0.75em;
+        color: #fff;
+        border-radius: 4px;
+        padding: 1px 7px;
+        margin: 3px 0 2px 0;
+    }
+    .poi-popup .poi-date {
+        color: var(--secondary);
+        font-size: 0.85em;
+    }
+    .poi-popup p {
+        margin: 4px 0 0 0;
+    }
 </style>
 
+<div id="travel-legend" class="travel-legend"></div>
 <div id="travel-map" aria-label="旅游足迹地图"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
 <script>
     (function () {
         var places = {{ hugo.Data.travel.places | jsonify | safeJS }};
+
+        // 分类定义：与 data/travel.yml 的 category 字段对应
+        var CATEGORIES = {
+            historic:   { label: "古迹建筑", color: "#b45309", icon: "🏛️" },
+            nature:     { label: "自然风景", color: "#15803d", icon: "🏔️" },
+            park:       { label: "公园园林", color: "#16a34a", icon: "🌳" },
+            museum:     { label: "博物馆",   color: "#7c3aed", icon: "🏺" },
+            temple:     { label: "寺庙教堂", color: "#0e7490", icon: "⛩️" },
+            viewpoint:  { label: "观景打卡", color: "#db2777", icon: "📸" },
+            restaurant: { label: "餐厅美食", color: "#ea580c", icon: "🍜" },
+            cafe:       { label: "咖啡甜品", color: "#a16207", icon: "☕" },
+            hotel:      { label: "酒店住宿", color: "#1d4ed8", icon: "🏨" },
+            shopping:   { label: "购物街区", color: "#be123c", icon: "🛍️" },
+            nightlife:  { label: "演出夜生活", color: "#7e22ce", icon: "🎭" },
+            transport:  { label: "交通体验", color: "#4b5563", icon: "🚄" }
+        };
+        var DEFAULT_CAT = { label: "其他", color: "#6b7280", icon: "📍" };
+
+        function catOf(name) {
+            return CATEGORIES[name] || DEFAULT_CAT;
+        }
+
         var map = L.map('travel-map', { scrollWheelZoom: false });
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -37,22 +117,46 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+        function makeIcon(cat) {
+            return L.divIcon({
+                className: '',
+                html: '<div class="poi-pin" style="background:' + cat.color + '"><span>' + cat.icon + '</span></div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30],
+                popupAnchor: [0, -30]
+            });
+        }
+
         var points = [];
+        var usedCats = {};
         places.forEach(function (p) {
             if (typeof p.lat !== 'number' || typeof p.lon !== 'number') return;
-            var html = '<b>' + p.name + '</b>';
-            if (p.date) html += '<br><small>' + p.date + '</small>';
-            if (p.note) html += '<div class="travel-popup"><p>' + p.note + '</p></div>';
-            L.marker([p.lat, p.lon]).addTo(map).bindPopup(html);
+            var cat = catOf(p.category);
+            usedCats[p.category in CATEGORIES ? p.category : 'other'] = cat;
+            var html = '<div class="poi-popup"><b>' + p.name + '</b><br>' +
+                '<span class="poi-cat" style="background:' + cat.color + '">' + cat.label + '</span>';
+            if (p.date) html += ' <span class="poi-date">' + p.date + '</span>';
+            if (p.note) html += '<p>' + p.note + '</p>';
+            html += '</div>';
+            L.marker([p.lat, p.lon], { icon: makeIcon(cat) }).addTo(map).bindPopup(html);
             points.push([p.lat, p.lon]);
         });
 
+        // 图例：只显示数据中出现过的分类
+        var legend = document.getElementById('travel-legend');
+        var items = Object.keys(usedCats).map(function (key) {
+            var cat = usedCats[key];
+            return '<span class="legend-item"><span class="legend-dot" style="background:' +
+                cat.color + '"></span>' + cat.icon + ' ' + cat.label + '</span>';
+        });
+        if (items.length) legend.innerHTML = items.join('');
+
         if (points.length > 1) {
-            map.fitBounds(points, { padding: [40, 40] });
+            map.fitBounds(points, { padding: [50, 50], maxZoom: 13 });
         } else if (points.length === 1) {
-            map.setView(points[0], 10);
+            map.setView(points[0], 15);
         } else {
-            map.setView([31.23, 121.47], 4);
+            map.setView([31.23, 121.47], 12);
         }
     })();
 </script>
