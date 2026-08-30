@@ -144,4 +144,25 @@ places:
     date: 2024-07
     category: restaurant
     note: 在莫斯科的送别餐
-    
+  
+  # 大阪
+  - name: 黑门市场
+    lat: 34.665328
+    lon: 135.506977
+    date: 2024-08
+    category: shopping
+    note: 大阪市中心的历史悠久的商店街
+  - name: 大阪城
+    lat: 34.686597
+    lon: 135.525985
+    date: 2024-08
+    category: historic
+    note: 现代重建建筑，钢筋水泥制成，里面还有电梯，没什么意思，堪称大阪黄鹤楼
+  - name: 相铁 Grand Fresa 大阪难波
+    lat: 34.668359
+    lon: 135.506661
+    date: 2024-08
+    category: hotel
+    note: 日本桥的一家酒店，设施还不错，离地铁站近，晚上有点热
+  
+  
