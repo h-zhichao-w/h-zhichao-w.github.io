@@ -68,7 +68,7 @@ params:
   ShowAllPagesInArchive: true
   ShowPageNums: true
   ShowToc: true
-  comments: true   # giscus 评论，见 layouts/partials/comments.html 中的配置说明
+  omments: true   # giscus 评论，见 layouts/partials/comments.html 中的配置说明
   # og/分享预览图（占位，正式图做好后覆盖 static/images/og-cover.png 即可）
   images: ["images/og-cover.png"]
   profileMode:
@@ -87,7 +87,7 @@ params:
   homeInfoParams:
     Title: "Hi, I'm Zhichao."
     Content: |
-      I am a graduate student from Shanghai Jiao Tong University (SJTU). I have two bachelor degrees, one from SJTU and the other from Московский Авиационный Институт (МАИ). My current research interests include combinational optimization, reinforcement learning, and application of Large Language Models (LLM). I have also done some work on navigation, constellation mission planning, intention recognition of UAV swarms.
+      I am a graduate student from Shanghai Jiao Tong University (SJTU). I have two bachelor degrees, one from SJTU and the other from Московский Авиационный Институт (МАИ). My current research interests include combinational optimization, Reinforcement Learning (RL), and decisions with Large Language Models (LLM) and agents. I have also done some work on navigation, constellation mission planning, intention recognition of UAV swarms.
 
 
       I enjoy reading, especially detective novels. I am a loyal fan of Poirot — Agatha Christie, John Dickson Carr, Ellery Queen, and Kindaichi Kōsuke — Yokomizo Seishi. I am also keen on learning languages. I am a native Chinese speaker, fluent in English and Russian, and currently learning Japanese.
@@ -156,5 +156,3 @@ services:
     disableInlineCSS: true
   x:
     disableInlineCSS: true
-  googleAnalytics:
-    ID: G-XXXXXXXXXX   # 占位：换成你自己的 GA4 衡量 ID 后生效
