@@ -1,0 +1,60 @@
+{{- define "main" -}}
+
+<h1 class="post-title">{{ .Title }}</h1>
+{{- with .Description }}
+<p style="color: var(--secondary); margin-top: -10px;">{{ . }}</p>
+{{- end }}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
+<style>
+    #travel-map {
+        height: 540px;
+        width: 100%;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        z-index: 0; /* 防止地图控件被页头遮挡 */
+    }
+    .travel-popup p {
+        margin: 4px 0 0 0;
+    }
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+        background: var(--theme);
+        color: var(--content);
+    }
+</style>
+
+<div id="travel-map" aria-label="旅游足迹地图"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+<script>
+    (function () {
+        var places = {{ hugo.Data.travel.places | jsonify | safeJS }};
+        var map = L.map('travel-map', { scrollWheelZoom: false });
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var points = [];
+        places.forEach(function (p) {
+            if (typeof p.lat !== 'number' || typeof p.lon !== 'number') return;
+            var html = '<b>' + p.name + '</b>';
+            if (p.date) html += '<br><small>' + p.date + '</small>';
+            if (p.note) html += '<div class="travel-popup"><p>' + p.note + '</p></div>';
+            L.marker([p.lat, p.lon]).addTo(map).bindPopup(html);
+            points.push([p.lat, p.lon]);
+        });
+
+        if (points.length > 1) {
+            map.fitBounds(points, { padding: [40, 40] });
+        } else if (points.length === 1) {
+            map.setView(points[0], 10);
+        } else {
+            map.setView([31.23, 121.47], 4);
+        }
+    })();
+</script>
+
+{{- end -}}

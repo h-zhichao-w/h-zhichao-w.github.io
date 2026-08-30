@@ -35,9 +35,12 @@ languages:
         - name: Archive
           url: archives
           weight: 5
+        - name: Travel
+          url: travel/
+          weight: 8
         - name: Tags
           url: tags/
-          weight: 7
+          weight: 9
         - name: Search
           url: search/
           weight: 10
