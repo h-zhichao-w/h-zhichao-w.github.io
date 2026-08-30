@@ -3,6 +3,7 @@
 # 字段说明：
 #   name     地点名称（必填）
 #   lat/lon  经纬度（必填，十进制度；高德/百度坐标注意先转 WGS84）
+#   region   区域（必填，用于页面上的区域筛选，如：上海 / 莫斯科 / 京都）
 #   category 分类（必填，见下方支持的取值；缺省为灰色的"其他"）
 #   date     到访时间（可选）
 #   note     一句话描述（可选）
@@ -18,23 +19,25 @@
 #   viewpoint  观景打卡   restaurant 餐厅美食  cafe      咖啡甜品
 #   hotel      酒店住宿   shopping  购物街区   nightlife 演出夜生活
 #   transport  交通体验
-#
-# 下面是示例点位，替换成你自己的足迹即可
+
 places:
   # 上海
   - name: 外滩
+    region: 上海
     lat: 31.235322
     lon: 121.487620
     category: historic
     date: 常来
     note: 万国建筑博览群，夜景必看，19点亮灯，整点敲钟报时播放《东方红》
   - name: 上海博物馆
+    region: 上海
     lat: 31.230346
     lon: 121.470861
     category: museum
     date: 常来
     note: 国内三大博物院之一
   - name: 包玉刚图书馆
+    region: 上海
     lat: 31.023823
     lon: 121.425372
     category: library
@@ -43,102 +46,119 @@ places:
   
   # 莫斯科
   - name: 红场
+    region: 莫斯科
     lat: 55.753610
     lon: 37.621484
     category: historic
     date: 2023 - 2024
     note: 莫斯科的中心，俄罗斯的象征，毗邻克里姆林宫
   - name: 圣瓦西里大教堂
+    region: 莫斯科
     lat: 55.752482
     lon: 37.623064
     category: orthodox
     date: 2023 - 2024
     note: 俄罗斯的象征，文明 6 奇观
   - name: ГУМ 百货
+    region: 莫斯科
     lat: 55.7546
     lon: 37.6215
     category: shopping
     date: 2023 - 2024
     note: 红场旁的百年百货，有一个巨大的玻璃穹顶，上面的自选餐厅很不错，去 ГУМ 吃冰淇淋是传统
   - name: 俄罗斯国家历史博物馆
+    region: 莫斯科
     lat: 55.755278
     lon: 37.617825
     date: 2024-09
     category: museum
     note: 俄罗斯国家历史综合性博物馆
   - name: 1812年卫国战争博物馆
+    region: 莫斯科
     lat: 55.756193
     lon: 37.618657
     category: museum
     date: 2024-09
     note: 展出1812年拿破仑战争相关内容的博物馆
   - name: 国立克里姆林宫剧院
+    region: 莫斯科
     lat: 55.751343
     lon: 37.615437
     category: nightlife
     date: 2023 - 2024
     note: 克里姆林宫里的剧院，有歌舞剧和芭蕾舞剧，票价非常实惠，以前是苏共开大会的地方，体验非常好
   - name: 列宁墓
+    region: 莫斯科
     lat: 55.753736
     lon: 37.619868
     category: historic
     date: 2023 - 2024
     note: 列宁长眠之地
   - name: 莫斯科大剧院
+    region: 莫斯科
     lat: 55.760239
     lon: 37.618522
     category: nightlife
     date: 2023 - 2024
     note: 俄文名直译为“大剧院”，文明 6 奇观
   - name: 购物中心 авиапарк
+    region: 莫斯科
     lat: 55.790249
     lon: 37.531141
     category: shopping
     date: 2023 - 2024
     note: 大型商场，里面有个超大的欧尚超市，商场中央有一个巨大的立柱，立柱充满水像水族馆一样
   - name: 莫斯科航空学院
+    region: 莫斯科
     lat: 55.811316
     lon: 37.501463
     date: 2023 - 2024
     category: school
     note: 没啥好说的
   - name: 宿舍
+    region: 莫斯科
     lat: 55.812880
     lon: 37.494680
     date: 2023 - 2024
     category: hotel
     note: 在莫斯科时住的宿舍
   - name: ГЭС-2
+    region: 莫斯科
     lat: 55.742731
     lon: 37.612740
     category: gallery
     date: 2023-11
     note: 老旧工厂改造的艺术中心，外立面大量替换为了玻璃，非常具有网红气息
   - name: 基督救世主大教堂
+    region: 莫斯科
     lat: 55.744716
     lon: 37.605490
     date: 2023-09
     category: orthodox
     note: 历史悠久的东正教堂，苏联时期被破坏，90年代重建
   - name: 普希金博物馆
+    region: 莫斯科
     lat: 55.747344
     lon: 37.605285
     date: 2023-09
     category: gallery
     note: 其实和普希金没什么关系，是一个美术馆，有大量的油画和雕塑
   - name: 特列季亚科夫画廊
+    region: 莫斯科
     lat: 55.741533
     lon: 37.620000
     date: 2023-10
     category: gallery
     note: 俄罗斯美术的殿堂，有包括《无名女郎》在内的大量世界级名画和雕塑
   - name: Чебуречная СССР
+    region: 莫斯科
     lat: 55.808755
     lon: 37.493947
     date: 2023 - 2024
     category: restaurant
     note: 一家苏联风情的小饭店，在俄罗斯的第一顿饭
   - name: 柴可夫斯基咖啡馆
+    region: 莫斯科
     lat: 55.769036
     lon: 37.596146
     date: 2024-07
@@ -147,18 +167,21 @@ places:
   
   # 大阪
   - name: 黑门市场
+    region: 大阪
     lat: 34.665328
     lon: 135.506977
     date: 2024-08
     category: shopping
     note: 大阪市中心的历史悠久的商店街
   - name: 大阪城
+    region: 大阪
     lat: 34.686597
     lon: 135.525985
     date: 2024-08
     category: historic
     note: 现代重建建筑，钢筋水泥制成，里面还有电梯，没什么意思，堪称大阪黄鹤楼
   - name: 相铁 Grand Fresa 大阪难波
+    region: 大阪
     lat: 34.668359
     lon: 135.506661
     date: 2024-08
@@ -167,48 +190,56 @@ places:
   
   # 京都
   - name: 稻荷山
+    region: 京都
     lat: 34.966967
     lon: 135.785496
     date: 2024-08
     category: mountain
     note: 稻禾神社后面的山，有成排的鸟居，路边有小神社，晚上爬山氛围感拉满，观景平台可以俯瞰京都夜景
   - name: 伏见稻荷大社
+    region: 京都
     lat: 34.967126
     lon: 135.772642
     date: 2024-08
     category: shinto
     note: 红色的成排鸟居
   - name: 国立京都博物馆
+    region: 京都
     lat: 34.989837
     lon: 135.772862
     date: 2024-08
     category: museum
     note: 建筑是典型的明治时期仿西洋建筑，展品以字画和器物居多，不少仿唐和仿宋作品；售票人员很热情，主动提出我可以买学生票；大厅有很有意思的互动区
   - name: 东本愿寺
+    region: 京都
     lat: 34.991060
     lon: 135.758451
     category: buddhist
     date: 2024-08
     note: 京都市内历史悠久的古寺
   - name: 八坂神社
+    region: 京都
     lat: 35.003609
     lon: 135.778237
     date: 2024-08
     category: shinto
     note: 祇园祭的重要场所，能看到非常完整的、热闹的日本传统神社祭典，祇园祭期间人会非常多
   - name: 法观寺
+    region: 京都
     lat: 34.998501
     lon: 135.779310
     date: 2024-08
     category: buddhist
     note: 非常好看的塔，配合一年坂、二年坂、三年坂的日式老街，非常的美丽，极富日本风情
   - name: 梅小路花传抄温泉酒店
+    region: 京都
     lat: 34.988458
     lon: 135.742466
     date: 2024-08
     category: hotel
     note: 私汤很不错
   - name: 京都站
+    region: 京都
     lat: 34.985304
     lon: 135.758794
     date: 2024-08
@@ -217,18 +248,21 @@ places:
   
   # 奈良
   - name: 东大寺
+    region: 奈良
     lat: 34.685805
     lon: 135.839896
     date: 2024-08
     category: museum
     note: 日本佛教华严宗大本山、南都七大寺之一，大佛殿是世界最大的木造建筑，殿内供奉高15米以上的卢舍那大佛，南大门有很著名的双体金刚力士像，现在更重要的是作为世界文化遗产和博物馆
   - name: 春日山 & 奈良鹿
+    region: 奈良
     lat: 34.681438
     lon: 135.852406
     date: 2024-08
     category: mountain
     note: 小鹿🦌可爱捏，但是会咬人☹️
   - name: 春日大社
+    region: 奈良
     lat: 34.681223
     lon: 135.847824
     date: 2024-08

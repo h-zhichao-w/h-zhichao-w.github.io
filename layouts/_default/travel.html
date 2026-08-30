@@ -20,7 +20,77 @@
         border: 1px solid var(--border);
         z-index: 0; /* 防止地图控件被页头遮挡 */
     }
-    /* 分类水滴标记：彩色底 + 白色圆片承托 emoji，保证图标可读 */
+
+    /* 筛选工具栏 */
+    .travel-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin: 12px 0 4px 0;
+    }
+    .travel-controls input[type="text"] {
+        flex: 1 1 240px;
+        padding: 7px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--theme);
+        color: var(--content);
+        font: inherit;
+    }
+    .travel-controls select,
+    .travel-controls button {
+        padding: 7px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--theme);
+        color: var(--content);
+        font: inherit;
+        cursor: pointer;
+    }
+    .travel-controls button:hover,
+    .travel-controls select:hover,
+    .travel-controls input:hover {
+        border-color: var(--secondary);
+    }
+    #travel-count {
+        color: var(--secondary);
+        font-size: 0.85em;
+        margin-inline-start: auto;
+    }
+
+    /* 图例：点击可开关对应分类 */
+    .travel-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+        margin: 8px 0 10px 0;
+        font-size: 0.85em;
+        color: var(--secondary);
+    }
+    .travel-legend .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        user-select: none;
+        transition: opacity 0.15s;
+    }
+    .travel-legend .legend-item.off {
+        opacity: 0.35;
+        text-decoration: line-through;
+    }
+    .travel-legend .legend-dot {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50% 50% 50% 3px;
+        transform: rotate(-45deg);
+        border: 1px solid #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 分类水滴标记：彩色底 + emoji 白色光环描边 */
     .poi-pin {
         width: 36px;
         height: 36px;
@@ -36,36 +106,22 @@
         transform: rotate(45deg);
         font-size: 22px;
         line-height: 1;
-        /* 白色描边光环：让 emoji 与任意底色都有分隔 */
         text-shadow:
             0 0 2px #fff, 0 0 2px #fff,
             1px 1px 2px #fff, -1px -1px 2px #fff,
             1px -1px 2px #fff, -1px 1px 2px #fff,
             0 2px 3px rgba(0, 0, 0, 0.25);
     }
-    /* 图例 */
-    .travel-legend {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px 14px;
-        margin: 10px 0;
-        font-size: 0.85em;
-        color: var(--secondary);
+    /* 坐标检索的临时定位标记 */
+    .coord-pin {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 4px solid var(--tertiary);
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     }
-    .travel-legend .legend-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .travel-legend .legend-dot {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border-radius: 50% 50% 50% 3px;
-        transform: rotate(-45deg);
-        border: 1px solid #fff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    }
+
     /* 聚合标记样式：适配站点亮暗主题 */
     .marker-cluster {
         background: transparent;
@@ -84,6 +140,7 @@
         border: 3px solid var(--tertiary);
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     }
+
     /* 弹窗 */
     .leaflet-popup-content-wrapper,
     .leaflet-popup-tip {
@@ -106,6 +163,15 @@
         margin: 4px 0 0 0;
     }
 </style>
+
+<div class="travel-controls">
+    <input id="travel-q" type="text" placeholder="按名称检索（如：博物馆），或输入坐标定位（如：55.75, 37.62）">
+    <select id="travel-region" title="按区域筛选">
+        <option value="">全部区域</option>
+    </select>
+    <button id="travel-reset" type="button">重置</button>
+    <span id="travel-count"></span>
+</div>
 
 <div id="travel-legend" class="travel-legend"></div>
 <div id="travel-map" aria-label="旅游足迹地图"></div>
@@ -146,8 +212,8 @@
         };
         var DEFAULT_CAT = { label: "其他", color: "#6b7280", icon: "📍" };
 
-        function catOf(name) {
-            return CATEGORIES[name] || DEFAULT_CAT;
+        function catKeyOf(p) {
+            return p.category in CATEGORIES ? p.category : 'other';
         }
 
         var map = L.map('travel-map', { scrollWheelZoom: true });
@@ -158,11 +224,15 @@
             maxClusterRadius: 50,
             spiderfyOnMaxZoom: true
         });
+        map.addLayer(cluster);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+
+        var tempLayer = L.layerGroup().addTo(map); // 坐标定位的临时标记
+        map.setView([32, 110], 3); // 初始视野，供后续 flyToBounds 使用
 
         function makeIcon(cat) {
             return L.divIcon({
@@ -174,39 +244,129 @@
             });
         }
 
-        var points = [];
-        var usedCats = {};
-        places.forEach(function (p) {
-            if (typeof p.lat !== 'number' || typeof p.lon !== 'number') return;
-            var cat = catOf(p.category);
-            usedCats[p.category in CATEGORIES ? p.category : 'other'] = cat;
+        function makeMarker(p) {
+            var cat = catKeyOf(p) in CATEGORIES ? CATEGORIES[catKeyOf(p)] : DEFAULT_CAT;
             var html = '<div class="poi-popup"><b>' + p.name + '</b><br>' +
                 '<span class="poi-cat" style="background:' + cat.color + '">' + cat.label + '</span>';
+            if (p.region) html += ' <span class="poi-date">' + p.region + '</span>';
             if (p.date) html += ' <span class="poi-date">' + p.date + '</span>';
             if (p.note) html += '<p>' + p.note + '</p>';
             html += '</div>';
-            cluster.addLayer(L.marker([p.lat, p.lon], { icon: makeIcon(cat) }).bindPopup(html));
-            points.push([p.lat, p.lon]);
-        });
-
-        map.addLayer(cluster);
-
-        // 图例：只显示数据中出现过的分类
-        var legend = document.getElementById('travel-legend');
-        var items = Object.keys(usedCats).map(function (key) {
-            var cat = usedCats[key];
-            return '<span class="legend-item"><span class="legend-dot" style="background:' +
-                cat.color + '"></span>' + cat.icon + ' ' + cat.label + '</span>';
-        });
-        if (items.length) legend.innerHTML = items.join('');
-
-        if (points.length > 1) {
-            map.fitBounds(points, { padding: [50, 50], maxZoom: 13 });
-        } else if (points.length === 1) {
-            map.setView(points[0], 15);
-        } else {
-            map.setView([31.23, 121.47], 12);
+            return L.marker([p.lat, p.lon], { icon: makeIcon(cat) }).bindPopup(html);
         }
+
+        // ===== 筛选状态 =====
+        var input = document.getElementById('travel-q');
+        var regionSel = document.getElementById('travel-region');
+        var resetBtn = document.getElementById('travel-reset');
+        var countEl = document.getElementById('travel-count');
+        var legendEl = document.getElementById('travel-legend');
+
+        var regions = [];
+        var presentCats = [];
+        var activeCats = new Set();
+        places.forEach(function (p) {
+            if (p.region && regions.indexOf(p.region) === -1) regions.push(p.region);
+            var key = catKeyOf(p);
+            if (presentCats.indexOf(key) === -1) presentCats.push(key);
+        });
+        regions.sort();
+        presentCats.forEach(function (key) { activeCats.add(key); });
+
+        regions.forEach(function (r) {
+            var opt = document.createElement('option');
+            opt.value = r;
+            opt.textContent = r;
+            regionSel.appendChild(opt);
+        });
+
+        function renderLegend() {
+            legendEl.innerHTML = presentCats.map(function (key) {
+                var cat = CATEGORIES[key] || DEFAULT_CAT;
+                var n = places.filter(function (p) { return catKeyOf(p) === key; }).length;
+                return '<span class="legend-item' + (activeCats.has(key) ? '' : ' off') +
+                    '" data-cat="' + key + '" title="点击显示/隐藏该分类">' +
+                    '<span class="legend-dot" style="background:' + cat.color + '"></span>' +
+                    cat.icon + ' ' + cat.label + ' (' + n + ')</span>';
+            }).join('');
+        }
+        legendEl.addEventListener('click', function (e) {
+            var item = e.target.closest('.legend-item');
+            if (!item) return;
+            var key = item.getAttribute('data-cat');
+            if (activeCats.has(key)) activeCats.delete(key); else activeCats.add(key);
+            renderLegend();
+            apply({ fit: false });
+        });
+
+        // 坐标解析："55.75, 37.62" / "55.75，37.62" / "55.75 37.62"
+        function parseCoord(s) {
+            var m = s.match(/^(-?\d{1,3}(?:\.\d+)?)[,，\s]+(-?\d{1,3}(?:\.\d+)?)$/);
+            if (!m) return null;
+            var lat = parseFloat(m[1]), lon = parseFloat(m[2]);
+            if (Math.abs(lat) > 90 || Math.abs(lon) > 180) return null;
+            return { lat: lat, lon: lon };
+        }
+
+        function apply(opts) {
+            opts = opts || {};
+            var q = input.value.trim();
+            var coord = parseCoord(q);
+            var needle = coord ? '' : q.toLowerCase();
+            var region = regionSel.value;
+            var shown = [];
+
+            cluster.clearLayers();
+            tempLayer.clearLayers();
+
+            places.forEach(function (p) {
+                if (typeof p.lat !== 'number' || typeof p.lon !== 'number') return;
+                if (region && p.region !== region) return;
+                if (!activeCats.has(catKeyOf(p))) return;
+                if (needle) {
+                    var hay = (p.name + ' ' + (p.note || '') + ' ' + (p.date || '') + ' ' + (p.region || '')).toLowerCase();
+                    if (hay.indexOf(needle) === -1) return;
+                }
+                shown.push(p);
+            });
+
+            shown.forEach(function (p) { cluster.addLayer(makeMarker(p)); });
+
+            if (coord) {
+                // 坐标检索：定位到该点并放置临时标记
+                tempLayer.addLayer(
+                    L.marker([coord.lat, coord.lon], {
+                        icon: L.divIcon({ className: '', html: '<div class="coord-pin"></div>', iconSize: [18, 18], iconAnchor: [9, 9] })
+                    }).bindPopup('目标坐标：' + coord.lat + ', ' + coord.lon)
+                );
+                map.flyTo([coord.lat, coord.lon], 13, { duration: 0.8 });
+            } else if (opts.fit && shown.length) {
+                map.flyToBounds(shown.map(function (p) { return [p.lat, p.lon]; }), { padding: [50, 50], maxZoom: 13, duration: 0.8 });
+            }
+
+            countEl.textContent = '显示 ' + shown.length + ' / ' + places.length +
+                (coord ? '（已定位到输入坐标）' : '');
+        }
+
+        var debounceTimer = null;
+        input.addEventListener('input', function () {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(function () { apply({ fit: false }); }, 200);
+        });
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') apply({ fit: true });
+        });
+        regionSel.addEventListener('change', function () { apply({ fit: true }); });
+        resetBtn.addEventListener('click', function () {
+            input.value = '';
+            regionSel.value = '';
+            activeCats = new Set(presentCats);
+            renderLegend();
+            apply({ fit: true });
+        });
+
+        renderLegend();
+        apply({ fit: true });
     })();
 </script>
 
