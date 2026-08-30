@@ -8,8 +8,9 @@
 #   note     一句话描述（可选）
 #
 # 支持的 category 取值：
-#   historic   古迹建筑   mountain  山         river     河流
-#   lake       湖泊       seaside   海滨       park      公园园林
+#   historic   古迹建筑   shinto    神社       modern    现代建筑
+#   mountain   山         river     河流       lake      湖泊
+#   seaside    海滨       waterfall 瀑布       park      公园园林
 #   museum     博物馆     buddhist  佛寺       taoist    道观
 #   catholic   天主教堂   orthodox  东正教堂   mosque    清真寺
 #   viewpoint  观景打卡   restaurant 餐厅美食  cafe      咖啡甜品
