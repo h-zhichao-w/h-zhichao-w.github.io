@@ -8,10 +8,13 @@
 #   note     一句话描述（可选）
 #
 # 支持的 category 取值：
-#   historic   古迹建筑   nature    自然风景   park      公园园林
-#   museum     博物馆     temple    寺庙教堂   viewpoint 观景打卡
-#   restaurant 餐厅美食   cafe      咖啡甜品   hotel     酒店住宿
-#   shopping   购物街区   nightlife 演出夜生活 transport 交通体验
+#   historic   古迹建筑   mountain  山         river     河流
+#   lake       湖泊       seaside   海滨       park      公园园林
+#   museum     博物馆     buddhist  佛寺       taoist    道观
+#   catholic   天主教堂   orthodox  东正教堂   mosque    清真寺
+#   viewpoint  观景打卡   restaurant 餐厅美食  cafe      咖啡甜品
+#   hotel      酒店住宿   shopping  购物街区   nightlife 演出夜生活
+#   transport  交通体验
 #
 # 下面是示例点位，替换成你自己的足迹即可
 places:
@@ -25,25 +28,37 @@ places:
     lat: 31.2286
     lon: 121.4747
     category: museum
-    date: 2025-05
+    date: 常来
     note: 青铜器馆藏一绝
-  - name: 豫园
-    lat: 31.2271
-    lon: 121.4921
-    category: park
-    date: 2024-10
-    note: 江南古典园林，九曲桥城隍庙
   
   # 莫斯科
   - name: 红场
-    lat: 55.7539
-    lon: 37.6208
+    lat: 55.753610
+    lon: 37.621484
     category: historic
-    date: 2019 - 2020
-    note: 圣瓦西里大教堂、克里姆林宫都在这
-  - name: 古姆百货
+    date: 2023 - 2024
+    note: 莫斯科的中心，俄罗斯的象征，毗邻克里姆林宫
+  - name: 圣瓦西里大教堂
+    lat: 55.752482
+    lon: 37.623064
+    category: orthodox
+    date: 2023 - 2024
+    note: 俄罗斯的象征，文明 6 奇观
+  - name: ГУМ 百货
     lat: 55.7546
     lon: 37.6215
     category: shopping
-    date: 2019 - 2020
-    note: 红场旁的百年百货，冰淇淋值得吃
+    date: 2023 - 2024
+    note: 红场旁的百年百货，有一个巨大的玻璃穹顶，上面的自选餐厅很不错，去 ГУМ 吃冰淇淋是传统
+  - name: 俄罗斯国家历史博物馆
+    lat: 55.755278
+    lon: 37.617825
+    date: 2024-09
+    category: museum
+    note: 俄罗斯国家历史综合性博物馆
+  - name: 1812年卫国战争博物馆
+    lat: 55.756193
+    lon: 37.618657
+    category: museum
+    date: 2024-09
+    note: 展出1812年拿破仑战争的博物馆
