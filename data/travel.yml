@@ -76,3 +76,27 @@ places:
     category: historic
     date: 2023 - 2024
     note: 列宁长眠之地
+  - name: 莫斯科大剧院
+    lat: 55.760239
+    lon: 37.618522
+    category: nightlife
+    date: 2023 - 2024
+    note: 俄文名直译为“大剧院”，文明 6 奇观
+  - name: 购物中心 авиапарк
+    lat: 55.790249
+    lon: 37.531141
+    category: shopping
+    date: 2023 - 2024
+    note: 大型商场，里面有个超大的欧尚超市，商场中央有一个巨大的立柱，立柱充满水像水族馆一样
+  - name: 莫斯科航空学院
+    lat: 55.811316
+    lon: 37.501463
+    date: 2023 - 2024
+    category: school
+    note: 没啥好说的
+  - name: 宿舍
+    lat: 55.812880
+    lon: 37.494680
+    date: 2023 - 2024
+    category: hotel
+    note: 在莫斯科时住的宿舍
