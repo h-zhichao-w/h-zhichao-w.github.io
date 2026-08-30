@@ -111,17 +111,37 @@ places:
   - name: ГЭС-2
     lat: 55.742731
     lon: 37.612740
-    category: 
+    category: gallery
     date: 2023-11
     note: 老旧工厂改造的艺术中心，外立面大量替换为了玻璃，非常具有网红气息
   - name: 基督救世主大教堂
     lat: 55.744716
     lon: 37.605490
     date: 2023-09
+    category: orthodox
     note: 历史悠久的东正教堂，苏联时期被破坏，90年代重建
   - name: 普希金博物馆
     lat: 55.747344
     lon: 37.605285
     date: 2023-09
-    category: 
+    category: gallery
     note: 其实和普希金没什么关系，是一个美术馆，有大量的油画和雕塑
+  - name: 特列季亚科夫画廊
+    lat: 55.741533
+    lon: 37.620000
+    date: 2023-10
+    category: gallery
+    note: 俄罗斯美术的殿堂，有包括《无名女郎》在内的大量世界级名画和雕塑
+  - name: Чебуречная СССР
+    lat: 55.808755
+    lon: 37.493947
+    date: 2023 - 2024
+    category: restaurant
+    note: 一家苏联风情的小饭店，在俄罗斯的第一顿饭
+  - name: 柴可夫斯基咖啡馆
+    lat: 55.769036
+    lon: 37.596146
+    date: 2024-07
+    category: restaurant
+    note: 在莫斯科的送别餐
+    
