@@ -21,3 +21,18 @@
 {{- with ($scratch.Get "meta") }}
 {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
 {{- end -}}
+
+{{- with .Params.series }}
+{{- $seriesName := index . 0 }}
+{{- $seriesPages := where (where site.RegularPages "Params.series" "intersect" .) "Permalink" "!=" $.Permalink }}
+{{- with $seriesPages }}
+<div class="series-nav" style="margin-top: 10px; font-size: 0.9em; border-left: 3px solid var(--tertiary); padding-left: 12px;">
+  <span>{{ i18n "series" | default "Series" }}: <strong>{{ $seriesName }}</strong></span>
+  <ul style="margin: 6px 0 0 0; padding-left: 16px;">
+    {{- range sort $seriesPages "Params.series_order" }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{- end }}
+  </ul>
+</div>
+{{- end }}
+{{- end }}

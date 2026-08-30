@@ -5,6 +5,8 @@ date: 2026-01-09
 title: 关于 SPO
 description: 另一种对 GRPO 的改进方法的介绍
 math: true
+series: ["RLVR 算法演进"]
+series_order: 4
 tags:
   - algorithm
   - LLM
@@ -14,7 +16,7 @@ tags:
 前言
 ---
 
-关于 [GRPO](https://h-zhichao-w.github.io/posts/%E5%85%B3%E4%BA%8E-grpo/) 及其[弊端](https://h-zhichao-w.github.io/posts/%E5%85%B3%E4%BA%8E-dapo/#%E4%BD%A0%E8%BF%99%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%E6%80%8E%E4%B9%88%E5%A4%8D%E7%8E%B0%E4%B8%8D%E5%87%BA%E6%9D%A5%E5%95%8A)我们之前已经讲过很多，这次我们来介绍另一种对 GRPO 提出改进的方法。 
+关于 [GRPO]({{< relref "grpo.md" >}}) 及其[弊端]({{< relref "dapo.md#你这实验结果怎么复现不出来啊" >}})我们之前已经讲过很多，这次我们来介绍另一种对 GRPO 提出改进的方法。 
 
 对于 GRPO 可能带来的退化组（奖励全部相同的组）问题，DAPO 采取的改进策略是 Dynamic Sampling，即在采样阶段，直接丢弃那些退化的组，但这种做法本质上是一种**拒绝采样（Rejection Sampling）**。虽然它保证了梯度不为零，但代价高昂：
 

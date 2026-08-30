@@ -16,15 +16,15 @@ mainsections: ["posts"]
 
 minify:
   disableXML: true
-  # minifyOutput: true
+  minifyOutput: true
 
 pagination:
   disableAliases: false
-  pagerSize: 5
+  pagerSize: 8
 
 languages:
   en:
-    languageName: "English"
+    label: "English"
     weight: 1
     taxonomies:
       category: categories
@@ -67,7 +67,6 @@ params:
   ShowToc: true
   # comments: false
   images: ["images/papermod-cover.png"]
-
   profileMode:
     enabled: false
     title: Zhichao Wang
@@ -84,10 +83,10 @@ params:
   homeInfoParams:
     Title: "Hi, I'm Zhichao."
     Content: |
-      I am a graduate student from Shanghai Jiao Tong University (SJTU). I have two bachelor degrees, one from SJTU and the other from Московский Аваиационный Институт (МАИ). My current research interests include combinational optimization, reinforcement learning, and application of Large Language Models (LLM). I have also done some work on navigation, constellation mission planning, intention recognition of UAV swarms.
+      I am a graduate student from Shanghai Jiao Tong University (SJTU). I have two bachelor degrees, one from SJTU and the other from Московский Авиационный Институт (МАИ). My current research interests include combinational optimization, reinforcement learning, and application of Large Language Models (LLM). I have also done some work on navigation, constellation mission planning, intention recognition of UAV swarms.
 
 
-      I enjoy reading, especially detective novels. I am a loyal fan of Poriot - Agatha Chritie, John Dickson Carr, Ellery Queen, and Kindaichi Kōsuke - Yokomizo Seishi. I am also keen on learnign languages. I am a native Chinese speaker, fluent in English and Russian, and currently learning Japanese.
+      I enjoy reading, especially detective novels. I am a loyal fan of Poirot — Agatha Christie, John Dickson Carr, Ellery Queen, and Kindaichi Kōsuke — Yokomizo Seishi. I am also keen on learning languages. I am a native Chinese speaker, fluent in English and Russian, and currently learning Japanese.
 
 
       I spend most of my life in Shanghai, but I have also lived in Russia for a year and traveled to several other cities, home and abroad. I have uploaded my travel vlogs to my Bilibili channel.
@@ -102,7 +101,7 @@ params:
       url: "https://github.com/h-zhichao-w"
     - name: email
       title: Email me
-      url: "hansen_wong@sjtu.edu.cn"
+      url: "mailto:hansen_wong@sjtu.edu.cn"
     - name: bilibili
       title: Bilibili
       url: "https://space.bilibili.com/35778845"

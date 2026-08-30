@@ -7,6 +7,8 @@ tags:
   - RL
   - algorithm
   - LLM
+series: ["RLVR 算法演进"]
+series_order: 1
 description: 关于 GRPO 的简单介绍
 math: true
 ---
