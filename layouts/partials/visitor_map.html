@@ -1,6 +1,7 @@
 {{- /* 访客足迹地图：在 config.yml 配置 params.visitorMap.endpoint 后显示 */ -}}
 {{- $vm := site.Params.visitorMap }}
-{{- if and $vm $vm.endpoint }}
+{{- $ep := "" }}{{ with $vm }}{{ $ep = strings.TrimRight "/" .endpoint }}{{ end }}
+{{- if $ep }}
 <div class="visitor-map-wrap">
     <h2 class="visitor-title">{{ $vm.title | default "访客足迹" }}</h2>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
@@ -24,7 +25,7 @@
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(map);
 
-        fetch('{{ $vm.endpoint }}/locations')
+        fetch('{{ $ep }}/locations')
             .then(function (r) { return r.json(); })
             .then(function (data) {
                 var locations = (data && data.locations) || [];

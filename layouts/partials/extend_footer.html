@@ -3,11 +3,12 @@
 
 {{- /* 访客足迹记录信号：每次页面加载向 Worker 的 /collect 发送一次 */ -}}
 {{- $vm := site.Params.visitorMap }}
-{{- if and $vm $vm.endpoint }}
+{{- $ep := "" }}{{ with $vm }}{{ $ep = strings.TrimRight "/" .endpoint }}{{ end }}
+{{- if $ep }}
 <script>
     (function () {
         try {
-            var url = '{{ $vm.endpoint }}/collect';
+            var url = '{{ $ep }}/collect';
             if (navigator.sendBeacon) {
                 navigator.sendBeacon(url);
             } else {
