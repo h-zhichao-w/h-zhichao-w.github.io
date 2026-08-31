@@ -4,6 +4,30 @@ const ALLOWED_ORIGIN = 'https://h-zhichao-w.github.io';
 
 const redis = Redis.fromEnv();
 
+// 与 collect.ts 保持一致的归一化映射，纠正历史数据中可能遗留的缩写
+const CITY_NORMALIZE: Record<string, string> = {
+  SG: 'Singapore',
+  HK: 'Hong Kong',
+  TW: 'Taipei',
+  MO: 'Macau',
+  KR: 'Seoul',
+  JP: 'Tokyo',
+  US: 'United States',
+  GB: 'London',
+  DE: 'Berlin',
+  FR: 'Paris',
+  AE: 'Dubai',
+};
+
+function normalizeCity(city: string, country: string): string {
+  const c = city.trim();
+  if (!c) return country;
+  if (/^[A-Z]{2,3}$/.test(c) && c === country && CITY_NORMALIZE[c]) {
+    return CITY_NORMALIZE[c];
+  }
+  return c;
+}
+
 export async function GET(_request: Request) {
   try {
     const keys: string[] = await redis.smembers('loc-index');
@@ -27,7 +51,7 @@ export async function GET(_request: Request) {
       locations.push({
         lat: Number(data.lat),
         lon: Number(data.lon),
-        city: data.city || '',
+        city: normalizeCity(data.city || '', data.country || ''),
         country: data.country || '',
         count: Number(data.count) || 0,
       });
