@@ -70,3 +70,30 @@ code, pre {
 .dark .chroma .nn {
     color: #79c0ff;
 }
+
+/* ============ 访客足迹地图（首页底部小组件） ============ */
+
+.visitor-map-wrap {
+    margin: calc(var(--gap) * 2) 0 var(--gap) 0;
+}
+
+.visitor-title {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+}
+
+/* 世界地图比例：宽 2 : 高 1，随容器自适应，并限制最大高度 */
+#visitor-map {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    max-height: 420px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    z-index: 0; /* 防止地图控件被页头遮挡 */
+}
+
+.visitor-note {
+    color: var(--secondary);
+    font-size: 0.8em;
+    margin: 6px 0 0 0;
+}

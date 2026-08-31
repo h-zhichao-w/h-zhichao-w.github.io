@@ -30,5 +30,3 @@ resources/_gen/
 # Obsidian
 .obsidian/
 *.obsidian
-# Hugo build output
-public/

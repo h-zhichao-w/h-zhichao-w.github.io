@@ -71,6 +71,10 @@ params:
   comments: true   # giscus 评论，见 layouts/partials/comments.html 中的配置说明
   # og/分享预览图（占位，正式图做好后覆盖 static/images/og-cover.png 即可）
   images: ["images/og-cover.png"]
+  # 访客足迹地图（方案见 worker/README.md，部署 Worker 后取消注释并填入地址）
+  visitorMap:
+    endpoint: "http://127.0.0.1:8899"
+    title: "访客足迹"
   profileMode:
     enabled: false
     title: Zhichao Wang

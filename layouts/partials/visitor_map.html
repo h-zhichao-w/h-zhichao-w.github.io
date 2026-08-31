@@ -1,0 +1,51 @@
+{{- /* 访客足迹地图：在 config.yml 配置 params.visitorMap.endpoint 后显示 */ -}}
+{{- $vm := site.Params.visitorMap }}
+{{- if and $vm $vm.endpoint }}
+<div class="visitor-map-wrap">
+    <h2 class="visitor-title">{{ $vm.title | default "访客足迹" }}</h2>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
+    <div id="visitor-map" aria-label="访客足迹地图"></div>
+    <p class="visitor-note">基于 Cloudflare 的匿名地理位置统计（城市级，不记录 IP）</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+<script>
+    (function () {
+        var el = document.getElementById('visitor-map');
+        if (!el || typeof L === 'undefined') return;
+
+        var map = L.map('visitor-map', {
+            scrollWheelZoom: false,
+            worldCopyJump: true,
+            attributionControl: false,
+            zoomControl: false,
+            minZoom: 1
+        });
+        map.setView([25, 40], 1);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12 }).addTo(map);
+
+        fetch('{{ $vm.endpoint }}/locations')
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                var locations = (data && data.locations) || [];
+                if (!locations.length) return;
+                var max = Math.max.apply(null, locations.map(function (l) { return l.count; }).concat([1]));
+                locations.forEach(function (l) {
+                    if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
+                    var radius = 6 + 12 * Math.sqrt(l.count / max);
+                    L.circleMarker([l.lat, l.lon], {
+                        radius: radius,
+                        color: '#fff',
+                        weight: 1.5,
+                        fillColor: '#e07a5f',
+                        fillOpacity: 0.75
+                    }).addTo(map).bindPopup(
+                        '<b>' + (l.city || l.country || '未知位置') + '</b><br>' +
+                        (l.country ? l.country + ' · ' : '') + l.count + ' 次访问'
+                    );
+                });
+            })
+            .catch(function () { /* 统计服务不可用时静默 */ });
+    })();
+</script>
+{{- end -}}

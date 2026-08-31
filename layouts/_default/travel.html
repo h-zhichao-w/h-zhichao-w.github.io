@@ -339,4 +339,10 @@
     })();
 </script>
 
+{{- if (.Param "comments") }}
+<div style="margin-top: calc(var(--gap) * 2);">
+    {{- partial "comments.html" . }}
+</div>
+{{- end }}
+
 {{- end -}}
