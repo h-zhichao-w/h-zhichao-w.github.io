@@ -30,8 +30,31 @@ async function handle(request: Request) {
 
     const roundedLat = Number(lat).toFixed(2);
     const roundedLon = Number(lon).toFixed(2);
-    const city = request.headers.get('x-vercel-ip-city') || '';
+    const rawCity = request.headers.get('x-vercel-ip-city') || '';
     const country = request.headers.get('x-vercel-ip-country') || '';
+    // Vercel 偶将城市名返回为 2 字母国家代码（如 SG），归一化为完整名称
+    const CITY_ALIAS: Record<string, string> = {
+      'SG': 'Singapore',
+      'HK': 'Hong Kong',
+      'MO': 'Macau',
+      'TW': 'Taiwan',
+      'MY': 'Malaysia',
+      'TH': 'Thailand',
+      'ID': 'Indonesia',
+      'PH': 'Philippines',
+      'VN': 'Vietnam',
+      'JP': 'Japan',
+      'KR': 'South Korea',
+      'US': 'United States',
+      'GB': 'United Kingdom',
+      'DE': 'Germany',
+      'FR': 'France',
+      'AU': 'Australia',
+      'CA': 'Canada',
+      'BR': 'Brazil',
+      'IN': 'India',
+    };
+    const city = CITY_ALIAS[rawCity] || rawCity;
     const locKey = `loc:${roundedLat}:${roundedLon}`;
 
     // 原子递增计数 & 更新元数据

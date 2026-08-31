@@ -16,14 +16,10 @@
 
         var map = L.map('visitor-map', {
             attributionControl: false,
-            zoomControl: false,
+            zoomControl: true,
             zoomSnap: 0,
-            dragging: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
-            boxZoom: false,
-            keyboard: false,
-            touchZoom: false
+            minZoom: 1,
+            maxZoom: 12
         });
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -51,9 +47,17 @@
                 if (totalEl) totalEl.textContent = total.toLocaleString();
                 if (!locations.length) return;
                 var max = Math.max.apply(null, locations.map(function (l) { return l.count; }).concat([1]));
+                // 已有数据中可能残留未归一化的城市名（如 SG），前端兜底修正
+                var CITY_ALIAS = {
+                    'SG': 'Singapore', 'HK': 'Hong Kong', 'MO': 'Macau', 'TW': 'Taiwan',
+                    'MY': 'Malaysia', 'TH': 'Thailand', 'ID': 'Indonesia', 'PH': 'Philippines',
+                    'VN': 'Vietnam', 'JP': 'Japan', 'KR': 'South Korea', 'US': 'United States',
+                    'GB': 'United Kingdom', 'DE': 'Germany', 'FR': 'France', 'AU': 'Australia',
+                    'CA': 'Canada', 'BR': 'Brazil', 'IN': 'India'
+                };
                 locations.forEach(function (l) {
                     if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
-                    var radius = 4 + 8 * Math.sqrt(l.count / max);
+                    var radius = 3 + 5 * Math.sqrt(l.count / max);
                     L.circleMarker([l.lat, l.lon], {
                         radius: radius,
                         color: '#fff',
@@ -61,7 +65,7 @@
                         fillColor: '#e07a5f',
                         fillOpacity: 0.75
                     }).addTo(map).bindPopup(
-                        '<b>' + (l.city || l.country || '未知位置') + '</b><br>' +
+                        '<b>' + (CITY_ALIAS[l.city] || l.city || l.country || '未知位置') + '</b><br>' +
                         (l.country ? l.country + ' · ' : '') + l.count + ' 次访问'
                     );
                 });
