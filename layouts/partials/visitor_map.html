@@ -59,7 +59,7 @@
                 var mergedMap = {};
                 locations.forEach(function (l) {
                     if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
-                    var name = CITY_ALIAS[l.city] || l.city || l.country || '未知位置';
+                    var name = CITY_ALIAS[l.city] || l.city || CITY_ALIAS[l.country] || l.country || '未知位置';
                     var key = name + '|' + (l.country || '');
                     var m = mergedMap[key];
                     if (!m) {

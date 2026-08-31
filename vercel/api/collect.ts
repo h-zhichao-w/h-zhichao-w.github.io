@@ -54,7 +54,7 @@ async function handle(request: Request) {
       'BR': 'Brazil',
       'IN': 'India',
     };
-    const city = CITY_ALIAS[rawCity] || rawCity;
+    const city = CITY_ALIAS[rawCity] || rawCity || CITY_ALIAS[country] || '';
     const locKey = `loc:${roundedLat}:${roundedLon}`;
 
     // 原子递增计数 & 更新元数据
