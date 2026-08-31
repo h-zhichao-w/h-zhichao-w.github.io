@@ -53,7 +53,7 @@
                 var max = Math.max.apply(null, locations.map(function (l) { return l.count; }).concat([1]));
                 locations.forEach(function (l) {
                     if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
-                    var radius = 6 + 12 * Math.sqrt(l.count / max);
+                    var radius = 4 + 8 * Math.sqrt(l.count / max);
                     L.circleMarker([l.lat, l.lon], {
                         radius: radius,
                         color: '#fff',
