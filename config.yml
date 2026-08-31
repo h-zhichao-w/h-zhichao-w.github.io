@@ -73,7 +73,7 @@ params:
   images: ["images/og-cover.png"]
   # 访客足迹地图（方案见 worker/README.md，部署 Worker 后取消注释并填入地址）
   visitorMap:
-    endpoint: "http://127.0.0.1:8899"
+    endpoint: "https://visitor-map.hansen-wong.workers.dev/"
     title: "访客足迹"
   profileMode:
     enabled: false
