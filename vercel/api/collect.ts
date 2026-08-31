@@ -7,7 +7,7 @@ const UNIQUE_TTL = 172800; // 2 天，同一访客每天只计一次
 // 从环境变量自动读取 UPSTASH_REDIS_REST_URL 和 UPSTASH_REDIS_REST_TOKEN
 const redis = Redis.fromEnv();
 
-export async function GET(request: Request) {
+async function handle(request: Request) {
   try {
     const lat = request.headers.get('x-vercel-ip-latitude');
     const lon = request.headers.get('x-vercel-ip-longitude');
@@ -50,3 +50,6 @@ export async function GET(request: Request) {
     return new Response(null, { status: 204 });
   }
 }
+
+export const GET = handle;
+export const POST = handle;
