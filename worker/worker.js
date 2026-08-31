@@ -11,7 +11,7 @@
  */
 
 const ALLOWED_ORIGIN = 'https://h-zhichao-w.github.io';
-const UNIQUE_TTL = 172800; // 访客去重记录保留 2 天
+const UNIQUE_TTL = 86400; // 访客去重记录保留 1 天
 
 export default {
   async fetch(request, env) {
