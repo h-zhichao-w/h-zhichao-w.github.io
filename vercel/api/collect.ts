@@ -2,7 +2,7 @@ import { Redis } from '@upstash/redis';
 import { createHash } from 'crypto';
 
 const ALLOWED_ORIGIN = 'https://h-zhichao-w.github.io';
-const UNIQUE_TTL = 172800; // 2 天，同一访客每天只计一次
+const UNIQUE_TTL = 7200; // 2 小时，去重标记过期时间（同一访客每小时只计一次）
 
 // 从环境变量自动读取 UPSTASH_REDIS_REST_URL 和 UPSTASH_REDIS_REST_TOKEN
 const redis = Redis.fromEnv();
@@ -15,13 +15,13 @@ async function handle(request: Request) {
       return new Response(null, { status: 204 });
     }
 
-    const day = new Date().toISOString().slice(0, 10);
+    const hour = new Date().toISOString().slice(0, 13); // 如 "2026-08-31T13"
     const ip = request.headers.get('x-forwarded-for') || '';
     const salt = process.env.SALT || '';
-    const hash = createHash('sha256').update(salt + ip + day).digest('hex');
+    const hash = createHash('sha256').update(salt + ip + hour).digest('hex');
 
-    // 同一访客今天是否已统计
-    const uniqueKey = `u:${day}:${hash}`;
+    // 同一访客这一小时内是否已统计
+    const uniqueKey = `u:${hour}:${hash}`;
     const seen = await redis.get(uniqueKey);
     if (seen) {
       return new Response(null, { status: 204 });
