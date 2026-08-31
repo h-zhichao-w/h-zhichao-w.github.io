@@ -157,4 +157,4 @@ services:
   x:
     disableInlineCSS: true
   googleAnalytics:
-    ID: G-XXXXXXXXXX   # 占位：换成你自己的 GA4 衡量 ID 后生效
+    ID: G-07BH9J2Z78
