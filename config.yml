@@ -160,5 +160,6 @@ services:
     disableInlineCSS: true
   x:
     disableInlineCSS: true
-  googleAnalytics:
-    ID: G-07BH9J2Z78
+  # Google Analytics 已移除，访客统计改用自建 Worker（visitorMap）
+  # googleAnalytics:
+  #   ID: G-07BH9J2Z78
