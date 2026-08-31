@@ -82,11 +82,13 @@ code, pre {
     margin-bottom: 8px;
 }
 
-/* 世界地图比例：宽 2 : 高 1，随容器自适应，并限制最大高度 */
+/* 世界地图比例：宽 2 : 高 1，随容器自适应，并限制最大尺寸（整体略缩小） */
 #visitor-map {
     width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
     aspect-ratio: 2 / 1;
-    max-height: 420px;
+    max-height: 320px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     z-index: 0; /* 防止地图控件被页头遮挡 */
@@ -96,4 +98,5 @@ code, pre {
     color: var(--secondary);
     font-size: 0.8em;
     margin: 6px 0 0 0;
+    text-align: center;
 }
