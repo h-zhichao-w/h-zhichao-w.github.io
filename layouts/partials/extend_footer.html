@@ -1,3 +1,20 @@
 {{- /* Footer custom content area start */ -}}
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
+
+{{- /* 访客足迹记录信号：每次页面加载向 Worker 的 /collect 发送一次 */ -}}
+{{- $vm := site.Params.visitorMap }}
+{{- if and $vm $vm.endpoint }}
+<script>
+    (function () {
+        try {
+            var url = '{{ $vm.endpoint }}/collect';
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(url);
+            } else {
+                fetch(url, { method: 'GET', mode: 'no-cors', keepalive: true }).catch(function () {});
+            }
+        } catch (e) { /* 统计失败不影响页面 */ }
+    })();
+</script>
+{{- end }}
 {{- /* Footer custom content area end */ -}}
