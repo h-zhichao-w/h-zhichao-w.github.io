@@ -1,8 +1,11 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
 import { createHash } from 'crypto';
 
 const ALLOWED_ORIGIN = 'https://h-zhichao-w.github.io';
 const UNIQUE_TTL = 172800; // 2 天，同一访客每天只计一次
+
+// 从环境变量自动读取 UPSTASH_REDIS_REST_URL 和 UPSTASH_REDIS_REST_TOKEN
+const redis = Redis.fromEnv();
 
 export async function GET(request: Request) {
   try {
@@ -19,11 +22,11 @@ export async function GET(request: Request) {
 
     // 同一访客今天是否已统计
     const uniqueKey = `u:${day}:${hash}`;
-    const seen = await kv.get(uniqueKey);
+    const seen = await redis.get(uniqueKey);
     if (seen) {
       return new Response(null, { status: 204 });
     }
-    await kv.set(uniqueKey, '1', { ex: UNIQUE_TTL });
+    await redis.set(uniqueKey, '1', { ex: UNIQUE_TTL });
 
     const roundedLat = Number(lat).toFixed(2);
     const roundedLon = Number(lon).toFixed(2);
@@ -32,15 +35,15 @@ export async function GET(request: Request) {
     const locKey = `loc:${roundedLat}:${roundedLon}`;
 
     // 原子递增计数 & 更新元数据
-    await kv.hincrby(locKey, 'count', 1);
-    await kv.hset(locKey, {
+    await redis.hincrby(locKey, 'count', 1);
+    await redis.hset(locKey, {
       lat: String(roundedLat),
       lon: String(roundedLon),
       city,
       country,
     });
     // 把位置 key 加入索引集合，方便 /locations 遍历
-    await kv.sadd('loc-index', locKey);
+    await redis.sadd('loc-index', locKey);
 
     return new Response(null, { status: 204 });
   } catch {

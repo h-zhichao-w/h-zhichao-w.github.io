@@ -1,10 +1,12 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
 
 const ALLOWED_ORIGIN = 'https://h-zhichao-w.github.io';
 
-export async function GET(request: Request) {
+const redis = Redis.fromEnv();
+
+export async function GET(_request: Request) {
   try {
-    const keys: string[] = await kv.smembers('loc-index');
+    const keys: string[] = await redis.smembers('loc-index');
     const locations: Array<{
       lat: number;
       lon: number;
@@ -14,7 +16,7 @@ export async function GET(request: Request) {
     }> = [];
 
     for (const key of keys) {
-      const data = await kv.hgetall<{
+      const data = await redis.hgetall<{
         lat: string;
         lon: string;
         city: string;
