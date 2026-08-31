@@ -86,9 +86,9 @@ code, pre {
    既无左右灰边、也不重复地块，高度由 aspect-ratio 决定不被截断 */
 #visitor-map {
     width: 100%;
-    max-width: 480px;
+    max-width: 600px;
     margin: 0 auto;
-    aspect-ratio: 1.6 / 1;
+    aspect-ratio: 1.2 / 1;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     overflow: hidden;
