@@ -46,7 +46,6 @@
                 var total = locations.reduce(function (s, l) { return s + (l.count || 0); }, 0);
                 if (totalEl) totalEl.textContent = total.toLocaleString();
                 if (!locations.length) return;
-                var max = Math.max.apply(null, locations.map(function (l) { return l.count; }).concat([1]));
                 // 已有数据中可能残留未归一化的城市名（如 SG），前端兜底修正
                 var CITY_ALIAS = {
                     'SG': 'Singapore', 'HK': 'Hong Kong', 'MO': 'Macau', 'TW': 'Taiwan',
@@ -55,8 +54,31 @@
                     'GB': 'United Kingdom', 'DE': 'Germany', 'FR': 'France', 'AU': 'Australia',
                     'CA': 'Canada', 'BR': 'Brazil', 'IN': 'India'
                 };
+                // 同一城市可能因坐标不同（如 SG 与 Singapore）被后端存成多个点，
+                // 这里按“归一化城市名 + 国家”合并：累加次数，坐标取次数最多的那个
+                var mergedMap = {};
                 locations.forEach(function (l) {
                     if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
+                    var name = CITY_ALIAS[l.city] || l.city || l.country || '未知位置';
+                    var key = name + '|' + (l.country || '');
+                    var m = mergedMap[key];
+                    if (!m) {
+                        mergedMap[key] = {
+                            lat: l.lat, lon: l.lon, city: name,
+                            country: l.country || '', count: l.count || 0,
+                            _peak: l.count || 0
+                        };
+                    } else {
+                        m.count += l.count || 0;
+                        if ((l.count || 0) > m._peak) {
+                            m._peak = l.count || 0;
+                            m.lat = l.lat; m.lon = l.lon;
+                        }
+                    }
+                });
+                var merged = Object.keys(mergedMap).map(function (k) { return mergedMap[k]; });
+                var max = Math.max.apply(null, merged.map(function (l) { return l.count; }).concat([1]));
+                merged.forEach(function (l) {
                     var radius = 3 + 5 * Math.sqrt(l.count / max);
                     L.circleMarker([l.lat, l.lon], {
                         radius: radius,
@@ -65,7 +87,7 @@
                         fillColor: '#e07a5f',
                         fillOpacity: 0.75
                     }).addTo(map).bindPopup(
-                        '<b>' + (CITY_ALIAS[l.city] || l.city || l.country || '未知位置') + '</b><br>' +
+                        '<b>' + l.city + '</b><br>' +
                         (l.country ? l.country + ' · ' : '') + l.count + ' 次访问'
                     );
                 });
