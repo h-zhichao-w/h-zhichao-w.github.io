@@ -19,7 +19,7 @@
 #   catholic   天主教堂   orthodox  东正教堂   mosque    清真寺
 #   viewpoint  观景打卡   restaurant 餐厅美食  cafe      咖啡甜品
 #   hotel      酒店住宿   shopping  购物街区   nightlife 演出夜生活
-#   transport  交通体验
+#   stadium    体育场馆   transport 交通体验
 
 places:
   # 上海
@@ -244,7 +244,13 @@ places:
     category: monument
     date: 2024-05
     note: 第一次世界大战士兵和英雄纪念碑
-  
+  - name: ЦСКА 室内足球场
+    lat: 55/790983
+    lon: 37.539378
+    category: 
+    date: 2023 - 2024
+    note: 足球俱乐部莫斯科中央陆军（ЦСКА）的足球场
+    
   # 大阪
   - name: 黑门市场
     region: 大阪
