@@ -15,21 +15,32 @@
         if (!el || typeof L === 'undefined') return;
 
         var map = L.map('visitor-map', {
-            scrollWheelZoom: false,
-            worldCopyJump: false,
             attributionControl: false,
             zoomControl: false,
-            minZoom: 1,
-            maxBounds: [[-85, -180], [85, 180]],
-            maxBoundsViscosity: 1.0
+            zoomSnap: 0,
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            boxZoom: false,
+            keyboard: false,
+            touchZoom: false
         });
-        map.setView([20, 10], 1);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 12,
-            noWrap: true,
-            bounds: [[-85, -180], [85, 180]]
+            maxZoom: 12
         }).addTo(map);
+
+        // 依据容器宽度计算缩放级别，使整张世界地图的宽度恰好铺满容器
+        // （单份世界宽 = 256 * 2^zoom 像素）——既无左右灰边，也不重复
+        function fitWorld() {
+            var w = el.clientWidth;
+            if (!w) return;
+            map.invalidateSize(false);
+            var zoom = Math.log2(w / 256);
+            map.setView([10, 0], zoom, { animate: false });
+        }
+        fitWorld();
+        window.addEventListener('resize', fitWorld);
 
         fetch('{{ $ep }}/locations')
             .then(function (r) { return r.json(); })

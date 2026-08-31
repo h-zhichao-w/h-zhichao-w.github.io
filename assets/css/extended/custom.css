@@ -82,15 +82,16 @@ code, pre {
     margin-bottom: 8px;
 }
 
-/* 世界地图比例：宽 2 : 高 1，随容器自适应，并限制最大尺寸（整体略缩小） */
+/* 地图容器固定 2:1；JS 按容器宽度动态计算缩放，使世界地图宽度恰好铺满，
+   既无左右灰边、也不重复地块，高度由 aspect-ratio 决定不被截断 */
 #visitor-map {
     width: 100%;
-    max-width: 640px;
+    max-width: 600px;
     margin: 0 auto;
     aspect-ratio: 2 / 1;
-    max-height: 320px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
+    overflow: hidden;
     z-index: 0; /* 防止地图控件被页头遮挡 */
 }
 
