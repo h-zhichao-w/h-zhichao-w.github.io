@@ -388,3 +388,12 @@ places:
     date: 2024-08
     category: shinto
     note: 奈良鹿周边可爱，御朱印写的很漂亮
+
+  - name: 赵家名吃四味烩菜
+    region: 开封
+    lat: 34.7936553163542
+    lon: 114.36386234710696
+    date: 2025-02
+    category: restaurant
+    note: 丸子汤好吃
+  
