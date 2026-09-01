@@ -19,7 +19,7 @@
 #   catholic   天主教堂   orthodox  东正教堂   mosque    清真寺
 #   viewpoint  观景打卡   restaurant 餐厅美食  cafe      咖啡甜品
 #   hotel      酒店住宿   shopping  购物街区   nightlife 演出夜生活
-#   stadium    体育场馆   transport 交通体验
+#   stadium    体育场馆   amusement 游乐园     transport 交通体验
 
 places:
   # 上海
@@ -391,9 +391,23 @@ places:
 
   - name: 赵家名吃四味烩菜
     region: 开封
-    lat: 34.79445107460983
-    lon: 114.35792984785849
+    lat: 34.794319
+    lon: 114.358543
     date: 2025-02
     category: restaurant
     note: 丸子汤好吃
+  - name: 开封东大寺
+    region: 开封
+    lat: 34.794691
+    lon: 114.358822
+    date: 2025-02
+    category: mosque
+    note: 历史悠久的清真寺
+  - name: 清明上河园
+    region: 开封
+    lat: 34.809760
+    lon: 114.334084
+    date: 2025-02
+    category: park
+    note: 宋代东京主题的游乐园，有非常多的表演，好玩
   
