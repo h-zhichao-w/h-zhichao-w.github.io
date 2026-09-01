@@ -410,4 +410,24 @@ places:
     date: 2025-02
     category: amusement
     note: 宋代东京主题的游乐园，有非常多的表演，好玩
+  - name: 龙亭公园
+    region: 开封
+    lat: 34.804307
+    lon: 114.346122
+    date: 2025-02
+    category: park
+    note: 有非常大的湖，据说是宋代皇宫遗址，等待进一步考古发掘和开发
+  - name: 开封铁塔
+    region: 开封
+    lat: 34.816578
+    lon: 114.364833
+    category: historic
+    note: 地理课必学，门票有点贵，其实不是铁做的，只是颜色像铁锈所以叫铁塔
+  - name: 大相国寺
+    region: 开封
+    lat: 34.792502
+    lon: 114.348782
+    category: buddhist
+    date: 2025-02
+    note: 倒拔垂杨柳的地方
   
