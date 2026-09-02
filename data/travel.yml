@@ -486,7 +486,7 @@ places:
     lon: 120.700350
     category: mountain
     date: 2026-04
-    note: 上面有治（智）标不治本塔
+    note: 上面有治(智)标不治本塔
   - name: 西山(海宁)
     region: 海宁
     lat: 30.534038
@@ -516,4 +516,46 @@ places:
     date: 2026-04
     note: 老厂区翻新的社区，但是开发程度低，没有店也没有什么可逛的
 
+  - name: 白玉山塔
+    region: 大连
+    lat: 38.809157
+    lon: 121.252096
+    date: 2025-10
+    category: historic
+    note: 旅顺港制高点，可以俯瞰整个旅顺港，日俄战争后日本为纪念战殁将士建造的纪念塔
+  - name: 胜利塔
+    region: 大连
+    lat: 38.806988
+    lon: 121.235247
+    date: 2025-10
+    category: historic
+    note: 苏联人立的纪念二战胜利的塔
+  - name: 旅顺博物馆
+    region: 大连
+    lat: 38.807550
+    lon: 121.229724
+    date: 2025-10
+    category: museum
+    note: 由过去的日本行政长官的官邸改建，非常典型的维新式、日西结合的建筑，建筑本身很好看，里面详细介绍了旅顺的历史
+  - name: 关东军司令部旧址
+    region: 大连
+    lat: 38.808883
+    lon: 121.228930
+    date: 2025-10
+    category: historic
+    note: 日本关东军司令部旧址，进不去
+  - name: 中苏友谊纪念塔
+    region: 大连
+    lat: 38.808493
+    lon: 121.229118
+    date: 2025-10
+    category: monument
+    note: rt，很漂亮
+  - name: 旅顺日俄监狱旧址
+    region: 大连
+    lat: 38.824547
+    lon: 121.259934
+    date: 2025-10
+    category: historic
+    note: 最早由俄国人建造，日俄战争后被日本人接管，关押了大量政治犯，包括安重根在内的大量抗日志士都被关押于此，监狱面积很大，主体是牢房，也有绞刑室等区域开放参观，展出了监狱设施及相关文字、图片和实物史料，后期日本大量处决关押人员，将尸体埋在后山，有详细展出埋尸场景和工具
   
