@@ -466,3 +466,54 @@ places:
     date: 2025-02
     category: historic
     note: 开封城墙西门，好看，旁边有个小型展览馆，可以看到明清两代层层叠加的砖层，然后可以沿着城墙的马道走到城门上，俯瞰开封夜景，城门楼里面有光影秀
+  
+  - name: 盐官古城
+    region: 海宁
+    lat: 30.40582
+    lon: 120.54070
+    category: amusement
+    date: 2026-04
+    note: 商业化程度比较低的古城，人少但是挺有意思，有很多表演，还有徐志摩家的酱园
+  - name: 观潮胜地公园
+    lat: 30.401873
+    lon: 120.541796
+    category: park
+    date: 2026-04
+    note: 看钱塘江大潮
+  - name: 东山(海宁)
+    region: 海宁
+    lat: 30.534366
+    lon: 120.700350
+    category: mountain
+    date: 2026-04
+    note: 上面有治（智）标不治本塔
+  - name: 西山(海宁)
+    region: 海宁
+    lat: 30.534038
+    lon: 120.688366
+    category: mountain
+    date: 2026-04
+    note: 上面有紫薇阁，山脚有徐志摩墓和古寺惠力寺
+  - name: 干河街 & 徐志摩故居
+    region: 海宁
+    lat: 30.530762
+    lon: 120.690651
+    category: historic
+    date: 2026-04
+    note: 没什么人的老街，徐志摩家房子很不错，很喜欢
+  - name: 南关厢
+    region: 海宁
+    lat: 30.523355
+    lon: 120.687368
+    category: historic
+    date: 2026-04
+    note: 典型的老街，商业化程度很低，没什么店
+  - name: 中丝三厂
+    region: 海宁
+    lat: 30.525166
+    lon: 120.690688
+    category: historic
+    date: 2026-04
+    note: 老厂区翻新的社区，但是开发程度低，没有店也没有什么可逛的
+
+  
