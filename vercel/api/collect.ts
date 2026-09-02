@@ -7,6 +7,15 @@ const UNIQUE_TTL = 7200; // 2 小时，去重标记过期时间（同一访客�
 // 从环境变量自动读取 UPSTASH_REDIS_REST_URL 和 UPSTASH_REDIS_REST_TOKEN
 const redis = Redis.fromEnv();
 
+function decodeHeaderValue(value: string): string {
+  if (!value) return '';
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 async function handle(request: Request) {
   try {
     const lat = request.headers.get('x-vercel-ip-latitude');
@@ -30,8 +39,8 @@ async function handle(request: Request) {
 
     const roundedLat = Number(lat).toFixed(2);
     const roundedLon = Number(lon).toFixed(2);
-    const rawCity = request.headers.get('x-vercel-ip-city') || '';
-    const country = request.headers.get('x-vercel-ip-country') || '';
+    const rawCity = decodeHeaderValue(request.headers.get('x-vercel-ip-city') || '').trim();
+    const country = (request.headers.get('x-vercel-ip-country') || '').trim().toUpperCase();
     // Vercel 偶将城市名返回为 2 字母国家代码（如 SG），归一化为完整名称
     const CITY_ALIAS: Record<string, string> = {
       'SG': 'Singapore',
@@ -54,7 +63,8 @@ async function handle(request: Request) {
       'BR': 'Brazil',
       'IN': 'India',
     };
-    const city = CITY_ALIAS[rawCity] || rawCity || CITY_ALIAS[country] || '';
+    // 城市缺失时保持为空，不能用国家名代替城市，否则会制造“United States”之类的伪城市点
+    const city = CITY_ALIAS[rawCity] || rawCity;
     const locKey = `loc:${roundedLat}:${roundedLon}`;
 
     // 原子递增计数 & 更新元数据

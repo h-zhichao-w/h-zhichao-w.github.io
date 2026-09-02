@@ -54,18 +54,36 @@
                     'GB': 'United Kingdom', 'DE': 'Germany', 'FR': 'France', 'AU': 'Australia',
                     'CA': 'Canada', 'BR': 'Brazil', 'IN': 'India'
                 };
+                var COUNTRY_CITY_ALLOWED = { 'SG': true, 'HK': true, 'MO': true };
+                function decodeName(value) {
+                    if (!value) return '';
+                    try {
+                        return decodeURIComponent(value);
+                    } catch (_) {
+                        return value;
+                    }
+                }
                 // 同一城市可能因坐标不同（如 SG 与 Singapore）被后端存成多个点，
                 // 这里按“归一化城市名 + 国家”合并：累加次数，坐标取次数最多的那个
                 var mergedMap = {};
                 locations.forEach(function (l) {
                     if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
-                    var name = CITY_ALIAS[l.city] || l.city || CITY_ALIAS[l.country] || l.country || '未知位置';
-                    var key = name + '|' + (l.country || '');
+                    var countryCode = l.country || '';
+                    var countryName = CITY_ALIAS[countryCode] || countryCode;
+                    var rawCity = decodeName(l.city || '');
+                    var name = CITY_ALIAS[rawCity] || rawCity;
+                    // 旧版后端曾在城市缺失时写入国家名；城市国家同名的地区除外
+                    if (!COUNTRY_CITY_ALLOWED[countryCode] && name && name === countryName) name = '';
+                    var displayName = name || '未知城市';
+                    // 未知城市不能按整个国家合并，否则会把相距很远的访问聚成一个点
+                    var key = name
+                        ? name + '|' + countryCode
+                        : '@' + l.lat + ':' + l.lon + '|' + countryCode;
                     var m = mergedMap[key];
                     if (!m) {
                         mergedMap[key] = {
-                            lat: l.lat, lon: l.lon, city: name,
-                            country: l.country || '', count: l.count || 0,
+                            lat: l.lat, lon: l.lon, city: displayName,
+                            country: countryName, count: l.count || 0,
                             _peak: l.count || 0
                         };
                     } else {

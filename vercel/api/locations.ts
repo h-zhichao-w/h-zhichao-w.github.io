@@ -4,6 +4,15 @@ const ALLOWED_ORIGIN = 'https://h-zhichao-w.github.io';
 
 const redis = Redis.fromEnv();
 
+function decodeStoredValue(value: string): string {
+  if (!value) return '';
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 export async function GET(_request: Request) {
   try {
     const keys: string[] = await redis.smembers('loc-index');
@@ -27,7 +36,8 @@ export async function GET(_request: Request) {
       locations.push({
         lat: Number(data.lat),
         lon: Number(data.lon),
-        city: data.city || '',
+        // 兼容修复前已写入 Redis 的 Council%20Bluffs 等 URL 编码城市名
+        city: decodeStoredValue(data.city || ''),
         country: data.country || '',
         count: Number(data.count) || 0,
       });
