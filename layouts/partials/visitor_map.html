@@ -54,6 +54,9 @@
                     'GB': 'United Kingdom', 'DE': 'Germany', 'FR': 'France', 'AU': 'Australia',
                     'CA': 'Canada', 'BR': 'Brazil', 'IN': 'India'
                 };
+                var COORDINATE_CITY_ALIAS = {
+                    '39.74,-104.99': 'Denver'
+                };
                 var COUNTRY_CITY_ALLOWED = { 'SG': true, 'HK': true, 'MO': true };
                 function decodeName(value) {
                     if (!value) return '';
@@ -72,6 +75,7 @@
                     var countryName = CITY_ALIAS[countryCode] || countryCode;
                     var rawCity = decodeName(l.city || '');
                     var name = CITY_ALIAS[rawCity] || rawCity;
+                    name = COORDINATE_CITY_ALIAS[l.lat + ',' + l.lon] || name;
                     // 旧版后端曾在城市缺失时写入国家名；城市国家同名的地区除外
                     if (!COUNTRY_CITY_ALLOWED[countryCode] && name && name === countryName) name = '';
                     var displayName = name || '未知城市';
