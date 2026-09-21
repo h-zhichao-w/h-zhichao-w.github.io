@@ -673,3 +673,38 @@ places:
     category: museum
     note: 位于铁西老工业区，原沈阳铸造厂改造而来，展示了中国工业发展史，陈列了大量的机床设备，同时也展示了铁西工业区的历史变革、工人生活变化、未来转型等，能够看到工业转型和下岗浪潮带来的冲击
   
+  - name: 天一广场
+    region: 宁波
+    lat: 29.872001
+    lon: 121.550020
+    category: shopping
+    date: 2025-02
+    note: 超 fancy 大广场
+  - name: 宁波圣母升天堂
+    region: 宁波
+    lat: 29.870503
+    lon: 121.549419
+    date: 2025-02
+    category: catholic
+    note: 法国人建的天主教堂，哥特式建筑，门口有从佘山教堂搬过去的雕像
+  - name: 天一阁
+    region: 宁波
+    lat: 29.873560
+    lon: 121.536105
+    date: 2025-02
+    category: historic
+    note: 天一阁，中国现存最古老的私家藏书楼，收藏了大量珍贵古籍，现辟为博物馆，旁边是月湖公园
+  - name: 雪窦山
+    region: 宁波
+    lat: 29.684157
+    lon: 121.217147
+    date: 2025-09
+    category: mountain
+    note: 佛教名山，弥勒佛道场，既有雪窦寺、张学良幽禁地等历史人文景点，也有妙高台、千丈岩等自然风光
+  - name: 宁波鼓楼
+    region: 宁波
+    lat: 29.876178
+    lon: 121.542376
+    date: 2025-02
+    category: shopping
+    note: 鼓楼步行街
