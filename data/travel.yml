@@ -515,6 +515,12 @@ places:
     category: historic
     date: 2026-04
     note: 老厂区翻新的社区，但是开发程度低，没有店也没有什么可逛的
+  - name: 海宁博物馆
+    lat: 30.534676
+    lon: 120.686086
+    category: museum
+    date: 2026-04
+    note: 小小的博物馆，有古生物、历史、人文等展品，三楼有花灯，地下是珍品
 
   - name: 白玉山塔
     region: 大连
@@ -708,3 +714,12 @@ places:
     date: 2025-02
     category: shopping
     note: 鼓楼步行街
+  - name: 宁波博物馆
+    region: 宁波
+    lat: 29.817268
+    lon: 121.540900
+    date: 2025-02
+    category: museum
+    note: 展出宁波历史
+
+
