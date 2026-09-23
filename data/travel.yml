@@ -757,3 +757,53 @@ places:
     date: 2026-02
     category: historic
     note: 有一些历史陈列，小小的
+  - name: 安庆博物馆
+    region: 安庆
+    lat: 30.539791
+    lon: 117.116972
+    date: 2026-02
+    category: museum
+    note: 兼做黄梅戏博物馆，里面有展出老安庆的历史，尤其是近代开埠以来的历史变革，以及黄梅戏的历史
+  - name: 陈独秀故居
+    region: 安庆
+    lat: 30.504532
+    lon: 117.033588
+    date: 2026-02
+    category: historic
+    note: 陈独秀一家的老房子，后门有一个二陈避难翻墙处，上面有一个墙绘
+  - name: 倒扒狮历史文化街区
+    region: 安庆
+    lat: 30.508516
+    lon: 117.033657
+    date: 2026-02
+    category: shopping
+    note: 老街，入口有一个牌坊，牌坊底部的狮子是倒立的形态，因此得名
+  - name: 圣救主座堂
+    region: 安庆
+    lat: 30.505828
+    lon: 117.037772
+    date: 2026-02
+    category: catholic
+    note: 哥特复兴式教堂，青砖建筑，美国圣公会修建
+  - name: 大南门
+    region: 安庆
+    lat: 30.503825
+    lon: 117.033250
+    date: 2026-02
+    category: shopping
+    note: 和不少历史景点很近的商业街区
+  - name: 熊范二烈士专祠
+    region: 安庆
+    lat: 30.503275
+    lon: 117.048828
+    date: 2026-02
+    category: monument
+    note: 纪念辛亥革命烈士
+  - name: 迎江寺
+    region: 安庆
+    lat: 30.503557
+    lon: 117.049300
+    date: 2026-02
+    category: buddhist
+    note: 有一座很高的塔
+    
