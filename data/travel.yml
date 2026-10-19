@@ -806,4 +806,33 @@ places:
     date: 2026-02
     category: buddhist
     note: 有一座很高的塔
-    
+
+  # 2026 国庆
+  - name: 河北博物院
+    region: 石家庄
+    lat: 38.040102
+    lon: 114.516721
+    date: 2026-10
+    category: museum
+    note: 非常苏系的建筑，场馆很大，完整逛完需要3 - 4个小时，镇馆之宝是中山靖王刘胜及其王后的金缕玉衣，汉代的长信宫灯，北朝的壁画，买了一个特别好看的冰箱贴
+  - name: 红星包子
+    region: 石家庄
+    category: restaurant
+    lat: 38.042147
+    lon: 114.514739
+    date: 2026-10
+    note: 老牌国营饭店，包子又香又好吃，金毛狮子鱼也很不错
+  - name: 正太广场
+    region: 石家庄
+    category: monument
+    lat: 38.044711
+    lon: 114.484674
+    date: 2026-10
+    note: 老京汉铁路车站，石家庄解放纪念碑，正太饭店是法国人建造的老式青砖建筑，也是石家庄解放的标志，吴禄贞被刺杀的地方
+  - name: 清真寺街
+    region: 石家庄
+    category: restaurant
+    lat: 38.048530
+    lon: 114.474878
+    date: 2026-10
+    note: 回民聚集区，有一个汉地清真寺，很多好吃的清真饭店和糕点
