@@ -55,9 +55,11 @@
                     'CA': 'Canada', 'BR': 'Brazil', 'IN': 'India'
                 };
                 var COORDINATE_CITY_ALIAS = {
-                    '39.74,-104.99': 'Denver'
+                    '39.74,-104.99': 'Denver',
+                    '47.61,-122.33': 'Seattle'
                 };
                 var COUNTRY_CITY_ALLOWED = { 'SG': true, 'HK': true, 'MO': true };
+                var CITY_STATE = { 'SG': 'Singapore', 'HK': 'Hong Kong', 'MO': 'Macau' };
                 function decodeName(value) {
                     if (!value) return '';
                     try {
@@ -76,9 +78,10 @@
                     var rawCity = decodeName(l.city || '');
                     var name = CITY_ALIAS[rawCity] || rawCity;
                     name = COORDINATE_CITY_ALIAS[l.lat + ',' + l.lon] || name;
+                    if (CITY_STATE[countryCode]) name = CITY_STATE[countryCode];
                     // 旧版后端曾在城市缺失时写入国家名；城市国家同名的地区除外
                     if (!COUNTRY_CITY_ALLOWED[countryCode] && name && name === countryName) name = '';
-                    var displayName = name || '未知城市';
+                    var displayName = name || (countryName ? countryName + '（城市未知）' : '未知城市');
                     // 未知城市不能按整个国家合并，否则会把相距很远的访问聚成一个点
                     var key = name
                         ? name + '|' + countryCode
