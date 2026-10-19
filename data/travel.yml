@@ -906,3 +906,102 @@ places:
     category: restaurant
     date: 2026-10
     note: 烧鸡太太太香了
+  # 保定
+  - name: 直隶总督署
+    region: 保定
+    lat: 38.859018
+    lon: 115.491105
+    category: historic
+    date: 2026-10
+    note: 清代直隶总督署，没什么看的
+  - name: 古莲花池
+    region: 保定
+    lat: 38.856693
+    lon: 115.491785
+    category: historic
+    date: 2026-10
+    note: 园林建筑，挺美的，里面还有清末建的直隶图书馆
+  - name: 大慈阁
+    region: 保定
+    lat: 38.859020
+    lon: 115.496411
+    category: historic
+    date: 2026-10
+    note: 宋代佛寺，清代重修，本体很高，阁内有壁画
+  - name: 淮军公所
+    region: 保定
+    lat: 38.855875
+    lon: 115.483276
+    category: historic
+    date: 2026-10
+    note: 淮军的祠堂和办公场所，门口挂的牌子是李鸿章祠堂；内有大戏楼，可以看保定老调（戏曲）
+  - name: 保定军校纪念馆
+    region: 保定
+    lat: 38.865545
+    lon: 115.520761
+    category: museum
+    date: 2026-10
+    note: 现代修复，陈列比较精美，有很多老照片，能看出保定军校为中国近代军队建设贡献了大量人才
+  - name: 永茂驴肉（莲池南大街总店）
+    region: 保定
+    lat: 38.855638
+    lon: 115.493345
+    category: restaurant
+    date: 2026-10
+    note: 排队王，驴肉火烧好吃得要命
+  - name: 白家罩饼（百花路店）
+    region: 保定
+    lat: 38.866022
+    lon: 115.469216
+    category: restaurant
+    date: 2026-10
+    note: 清真菜加官府菜，河北非遗；牛肉罩饼、鱼香肉丝、扒肉条/扒口条、总督豆腐，超级好吃
+  - name: 田记兔排
+    region: 保定
+    lat: 38.890791
+    lon: 115.453697
+    category: restaurant
+    date: 2026-10
+    note: 就是兔架，选的孜然味，好吃
+  - name: 强生餐厅
+    region: 保定
+    lat: 38.889438
+    lon: 115.448804
+    category: restaurant
+    date: 2026-10
+    note: 河北菜，麻仁鸡蛋、鸡里蹦超好吃
+  - name: 泰陵
+    region: 保定
+    lat: 39.370161
+    lon: 115.344767
+    category: historic
+    date: 2026-10
+    note: 清西陵是世界文化遗产，泰陵是雍正帝的陵寝，也是清西陵里规模最大的一座，能看出清朝全盛时期的国力。从大红门进去，神道两旁排着石像生，四周是成片的泰陵松海，神道整体有近3km，神道碑上刻着雍正（世宗宪皇帝）的庙号和完整谥号，最里面是高大的宝顶，可以上去绕着宝顶转一圈。
+  - name: 崇陵
+    region: 保定
+    lat: 39.395290
+    lon: 115.378458
+    category: historic
+    date: 2026-10
+    note: 光绪帝的陵寝，被大规模盗掘过，现在地宫开放，可以下去看。整座陵修得比较凑合，有一部分是民国时才修完的，看着有点可怜。光绪灵柩前还有人供着歼-20 和东风-5C 的模型。
+  - name: 昌西陵
+    region: 保定
+    lat: 39.359342
+    lon: 115.323754
+    category: historic
+    date: 2026-10
+    note: 嘉庆帝皇后的陵寝。里面有一圈回音壁，回音效果特别明显，比天坛的还好。
+  - name: 慕陵
+    region: 保定
+    lat: 39.342540
+    lon: 115.295792
+    category: historic
+    date: 2026-10
+    note: 道光帝的陵寝。享殿全部用金丝楠木建成，直接用的原木没有上漆，一进去就能闻到明显的楠木香味（其他几座陵里则有股霉味）
+  - name: 永福寺
+    region: 保定
+    lat: 39.380102
+    lon: 115.396162
+    category: buddhist
+    date: 2026-10
+    note: 清西陵的喇嘛寺，祭祀时会请寺里的喇嘛来念经。
