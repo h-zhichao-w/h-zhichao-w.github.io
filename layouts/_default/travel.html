@@ -280,13 +280,20 @@
                     '" data-cat="' + key + '" title="点击显示/隐藏该分类">' +
                     '<span class="legend-dot" style="background:' + cat.color + '"></span>' +
                     cat.icon + ' ' + cat.label + ' (' + n + ')</span>';
-            }).join('');
+            }).join('') +
+                '<span class="legend-item legend-reset" title="全部显示">重置</span>';
         }
         legendEl.addEventListener('click', function (e) {
             var item = e.target.closest('.legend-item');
             if (!item) return;
-            var key = item.getAttribute('data-cat');
-            if (activeCats.has(key)) activeCats.delete(key); else activeCats.add(key);
+            if (item.classList.contains('legend-reset')) {
+                activeCats = new Set(presentCats);
+            } else {
+                var key = item.getAttribute('data-cat');
+                // 全部开启时首次点击：只保留该分类；之后逐个切换
+                if (activeCats.size === presentCats.length) activeCats = new Set([key]);
+                else if (activeCats.has(key)) activeCats.delete(key); else activeCats.add(key);
+            }
             renderLegend();
             apply({ fit: false });
         });
