@@ -1048,3 +1048,123 @@ places:
     category: shopping
     date: 2026-10
     note: 明清时期邯郸县城的主干道，现在是商业化的购物街，还留着一些老建筑。
+  # 圣彼得堡
+  - name: 冬宫（艾尔米塔什博物馆）
+    region: 圣彼得堡
+    lat: 59.939868
+    lon: 30.314583
+    category: museum
+    date: 2024-06
+    note: ""
+  - name: 艾尔米塔什总参谋部大楼
+    region: 圣彼得堡
+    lat: 59.938305
+    lon: 30.317812
+    category: museum
+    date: 2024-06
+    note: ""
+  - name: 冬宫广场
+    region: 圣彼得堡
+    lat: 59.938991
+    lon: 30.315473
+    category: historic
+    date: 2024-06
+    note: ""
+  - name: 宫殿桥
+    region: 圣彼得堡
+    lat: 59.941168
+    lon: 30.308116
+    category: viewpoint
+    date: 2024-06
+    note: ""
+  - name: 彼得保罗要塞
+    region: 圣彼得堡
+    lat: 59.950143
+    lon: 30.314896
+    category: historic
+    date: 2024-06
+    note: ""
+  - name: 阿芙乐尔号巡洋舰
+    region: 圣彼得堡
+    lat: 59.955381
+    lon: 30.337901
+    category: monument
+    date: 2024-06
+    note: ""
+  - name: 圣以撒大教堂
+    region: 圣彼得堡
+    lat: 59.934127
+    lon: 30.305973
+    category: orthodox
+    date: 2024-06
+    note: ""
+  - name: 滴血救世主教堂
+    region: 圣彼得堡
+    lat: 59.940070
+    lon: 30.328633
+    category: orthodox
+    date: 2024-06
+    note: ""
+  - name: 国立俄罗斯博物馆
+    region: 圣彼得堡
+    lat: 59.938782
+    lon: 30.332383
+    category: museum
+    date: 2024-06
+    note: ""
+  - name: 米哈伊洛夫城堡
+    region: 圣彼得堡
+    lat: 59.940735
+    lon: 30.337600
+    category: museum
+    date: 2024-06
+    note: ""
+  - name: 法贝热博物馆
+    region: 圣彼得堡
+    lat: 59.934648
+    lon: 30.343136
+    category: museum
+    date: 2024-06
+    note: ""
+  - name: 阿尼奇科夫桥
+    region: 圣彼得堡
+    lat: 59.933252
+    lon: 30.343384
+    category: monument
+    date: 2024-06
+    note: ""
+  - name: 涅瓦大街
+    region: 圣彼得堡
+    lat: 59.932464
+    lon: 30.349258
+    category: shopping
+    date: 2024-06
+    note: ""
+  - name: 中央海军博物馆
+    region: 圣彼得堡
+    lat: 59.929536
+    lon: 30.293567
+    category: museum
+    date: 2024-06
+    note: ""
+  - name: 喀琅施塔得海军大教堂
+    region: 圣彼得堡
+    lat: 59.991756
+    lon: 29.777479
+    category: orthodox
+    date: 2024-06
+    note: ""
+  - name: 彼得宫大宫殿
+    region: 圣彼得堡
+    lat: 59.884562
+    lon: 29.908845
+    category: historic
+    date: 2024-06
+    note: ""
+  - name: Александр
+    region: 圣彼得堡
+    lat: 59.927464
+    lon: 30.311897
+    category: hotel
+    date: 2024-06
+    note: ""
