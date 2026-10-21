@@ -1217,3 +1217,24 @@ places:
     category: nightlife
     date: 2024-06
     note: 圣彼得堡的歌剧与芭蕾重镇，和莫斯科大剧院齐名。古典剧场，金碧辉煌，看一场芭蕾或歌剧很值。
+  - name: Пышечка
+    region: 圣彼得堡
+    date: 2024-06
+    lat: 59.9261813
+    lon: 30.3153214
+    category: restaurant
+    note: 甜甜圈无敌好吃
+  - name: Столовая ложка
+    region: 圣彼得堡
+    date: 2024-06
+    lat: 59.927820
+    lon: 30.311481
+    category: restaurant
+    note: 苏维埃式的食堂，味道不错
+  - name: Easy Wine
+    date: 2024-06
+    region: 圣彼得堡
+    lat: 59.928505
+    lon: 30.312423
+    category: restaurant
+    note: 格鲁吉亚菜，好吃，服务很好，坐落在一个居民楼天井里，有点像老社区的艺术化改造，环境很好
